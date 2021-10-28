@@ -1,0 +1,107 @@
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  .container {
+    max-width: 600px;
+    // min-height: max-content;
+    background-color: #fff;
+    padding: 1rem;
+  }
+}
+
+.aggregator {
+  width: 100%;
+  // height: 60px;
+  padding: 1rem;
+  background-color: cornflowerblue;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+
+  label {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 1rem;
+
+    span {
+      margin-top: 0.5rem;
+      font-size: 14px;
+      line-height: 14px;
+    }
+  }
+
+  .input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    input {
+      width: 90%;
+      height: 100%;
+      border: none;
+      padding: 0 1rem;
+    }
+
+    button {
+      height: 100%;
+      width: 10%;
+      min-width: 40px;
+      border: none;
+      background-color: #aaa;
+      cursor: pointer;
+
+      &:hover {
+        background-color: teal;
+      }
+    }
+  }
+}
+
+.summary {
+  width: 100%;
+  padding: 1rem;
+  background-color: greenyellow;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+}
+
+p {
+  display: inline-flex;
+}
+
+.record {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: aquamarine;
+  border-radius: 1rem;
+
+  a {
+    word-break: break-all;
+    margin-bottom: 0.5rem;
+  }
+
+  br {
+    margin-bottom: 0.5rem;
+  }
+
+  button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 1rem;
+    margin-left: auto;
+
+    &:hover {
+      background-color: teal;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/axie-tracker/static/css/main.77e67408.chunk.css",
+    "main.js": "/axie-tracker/static/js/main.67d832ec.chunk.js",
+    "main.js.map": "/axie-tracker/static/js/main.67d832ec.chunk.js.map",
+    "runtime-main.js": "/axie-tracker/static/js/runtime-main.32d691be.js",
+    "runtime-main.js.map": "/axie-tracker/static/js/runtime-main.32d691be.js.map",
+    "static/js/2.89f389e8.chunk.js": "/axie-tracker/static/js/2.89f389e8.chunk.js",
+    "static/js/2.89f389e8.chunk.js.map": "/axie-tracker/static/js/2.89f389e8.chunk.js.map",
+    "index.html": "/axie-tracker/index.html",
+    "static/css/main.77e67408.chunk.css.map": "/axie-tracker/static/css/main.77e67408.chunk.css.map",
+    "static/js/2.89f389e8.chunk.js.LICENSE.txt": "/axie-tracker/static/js/2.89f389e8.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.32d691be.js",
+    "static/js/2.89f389e8.chunk.js",
+    "static/css/main.77e67408.chunk.css",
+    "static/js/main.67d832ec.chunk.js"
+  ]
+}

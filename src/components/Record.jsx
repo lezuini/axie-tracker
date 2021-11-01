@@ -1,3 +1,6 @@
+import { ReactComponent as Copy } from "../images/copy.svg";
+import slp from "../images/smooth-love-potion.png";
+
 const Record = ({ account, lastPrice, deleteAccount }) => {
   const {
     in_game_slp,
@@ -16,41 +19,66 @@ const Record = ({ account, lastPrice, deleteAccount }) => {
     deleteAccount(ronin);
   };
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(ronin);
+  };
+
   return (
     <div className="record">
-      <h3>{name}</h3>
-      <a
-        href={`https://marketplace.axieinfinity.com/profile/${ronin}/axie`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {ronin}
-      </a>
-      <br />
-      <br />
-      <p>MMR: {mmr}</p>
-      <p>Rank: #{rank}</p>
-      <br />
-      <p>
-        Total SLP: {total_slp} ~ (${(total_slp * lastPrice).toFixed(4)})
-      </p>
-      <p>In Game SLP: {in_game_slp}</p>
-      <p>In Ronin SLP: {ronin_slp}</p>
-
-      <br />
-      <br />
+      <h3>Name: {name}</h3>
+      <div className="wallet">
+        <span>Wallet:</span>
+        <a
+          href={`https://marketplace.axieinfinity.com/profile/${ronin}/axie`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {ronin}
+        </a>
+        <button onClick={handleCopy}>
+          <Copy />
+        </button>
+      </div>
 
       <p>
-        Last Claim: {new Date(last_claim * 1000).toLocaleString()} ~ Next Claim:{" "}
-        {new Date(next_claim * 1000).toLocaleString()}
+        <span>MMR:</span>
+        <strong>{mmr}</strong>
+      </p>
+      <p>
+        <span>Rank: </span>
+        <strong>#{rank}</strong>
+      </p>
+      <p>
+        <span>SLP in Game:</span>
+        <strong>{in_game_slp}</strong>
+      </p>
+      <p>
+        <span>SLP in RONIN wallet:</span>
+        <strong>{ronin_slp}</strong>
+      </p>
+      <p className="total">
+        <img src={slp} alt="" />
+        <span>SLP:</span> <strong>{total_slp}</strong>
+        <span>${(total_slp * lastPrice).toFixed(4)}</span>
       </p>
 
-      <br />
-      <p>Lifetime SLP: {lifetime_slp}</p>
+      <p className="claim">
+        <span>Last Claim: </span>
+        <strong>{new Date(last_claim * 1000).toLocaleDateString()}</strong>
+      </p>
+      <p className="claim">
+        <span>Next Claim:</span>{" "}
+        <strong>{new Date(next_claim * 1000).toLocaleDateString()}</strong>
+      </p>
 
-      <br />
-      <br />
-      <button onClick={handleClick}>Delete</button>
+      <p>
+        <span>Lifetime SLP:</span>
+        <strong>{lifetime_slp}</strong>
+      </p>
+
+      <button className="delete" onClick={handleClick}>
+        Delete
+      </button>
     </div>
   );
 };

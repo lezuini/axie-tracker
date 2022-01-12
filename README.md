@@ -13,4 +13,4 @@ With this small tracker you can see the SLPs of the public RONIN accounts that y
 
 ### More about me
 
-- Twitter - [@leonardomeza87](https://www.twitter.com/leonardomeza87)
+- Twitter: [@leonardomeza87](https://www.twitter.com/leonardomeza87)

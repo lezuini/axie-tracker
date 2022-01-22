@@ -1,0 +1,102 @@
+.token-card {
+  width: 162px;
+  height: 152px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 6px;
+
+  position: relative;
+
+  background-color: #141925;
+
+  color: #fff;
+  font-family: "Quicksand", sans-serif;
+
+  padding: 1.5rem 1rem;
+
+  // .container {
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: flex-start;
+  //   align-items: flex-start;
+  // }
+
+  .icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #16222e;
+    border-radius: 50%;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .token {
+    h2 {
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 20px;
+      margin-bottom: 6px;
+    }
+    p {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 12px;
+      margin-bottom: 16px;
+    }
+  }
+
+  strong {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 18px;
+    margin-bottom: 6px;
+  }
+
+  .priceChange {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    span {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 14px;
+      margin-right: 6px;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &.positive {
+      span {
+        color: green;
+      }
+      svg {
+        fill: green;
+      }
+    }
+    &.negative {
+      span {
+        color: red;
+      }
+      svg {
+        fill: red;
+        transform: rotateZ(180deg);
+      }
+    }
+  }
+}

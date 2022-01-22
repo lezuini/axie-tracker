@@ -1,0 +1,27 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    h1 {
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    span {
+      color: #6f757f;
+
+      strong {
+        color: #9d9a33;
+      }
+    }
+  }
+}

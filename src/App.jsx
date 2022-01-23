@@ -7,8 +7,11 @@ import Header from "./components/Header/Header";
 // import Summary from "./components/Summary";
 import "./sass/App.scss";
 
+import { TokenDataContext } from "./contexts/TokenDataContext";
+import { AddresesContext } from "./contexts/AddresesContext";
+
 function App() {
-  // const GAME_API = "https://game-api.axie.technology/api/v1/";
+  const GAME_API = "https://game-api.axie.technology/api/v1/";
 
   // const [addresses, setAddresses] = useState(
   //   localStorage.getItem("addresses")
@@ -63,11 +66,39 @@ function App() {
   //   }
   // }, [addresses]);
 
+  const getTokenDataContext = {
+    symbol: "SLPUSDT",
+    priceChange: "-0.00290000",
+    priceChangePercent: "-19.205",
+    weightedAvgPrice: "0.01212706",
+    prevClosePrice: "0.01510000",
+    lastPrice: "0.01220000",
+    lastQty: "2240.00000000",
+    bidPrice: "0.01210000",
+    bidQty: "7708082.00000000",
+    askPrice: "0.01220000",
+    askQty: "393387.00000000",
+    openPrice: "0.01510000",
+    highPrice: "0.01520000",
+    lowPrice: "0.01050000",
+    volume: "4242185392.00000000",
+    quoteVolume: "51445216.07270000",
+    openTime: 1642792457786,
+    closeTime: 1642878857786,
+    firstId: 57913756,
+    lastId: 58036612,
+    count: 122857,
+  };
+
   return (
     <main className="app">
       <div className="container">
         <Header />
-        <FeaturedView />
+        <TokenDataContext.Provider value={getTokenDataContext}>
+          <AddresesContext.Provider value={"qa"}>
+            <FeaturedView />
+          </AddresesContext.Provider>
+        </TokenDataContext.Provider>
         {/* <AddressAggregator updateAddresses={updateAddresses} />
         {binanceData && gameData && (
           <>

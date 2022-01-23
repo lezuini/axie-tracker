@@ -3,6 +3,12 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  height: 84px;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
 
   .text {
     display: flex;
@@ -14,6 +20,7 @@ header {
       font-size: 18px;
       font-weight: bold;
       color: #fff;
+      font-family: "Exo", sans-serif;
     }
 
     span {

@@ -34,16 +34,29 @@ const PerformanceSummary = ({ binanceData, gameData }) => {
   return (
     <div className="summary">
       <h2>Scholars</h2>
-      <h3>SLP</h3>
-      <p>In game: 200</p>
-      <span>~ $40</span>
-      <p>In wallet: 200</p>
-      <span>~ $40</span>
-      <h3>Total</h3>
-      <strong>3000</strong>
-      <span>~ $40</span>
-      <p>Profit</p>
-      <span>~ $20 (50%)</span>
+      <div className="group">
+        <p>In game:</p>
+        <strong>
+          400 <span>SLP</span>
+        </strong>
+        <span>USDT $80</span>
+      </div>
+      <div className="group">
+        <p>In wallet:</p>
+        <strong>
+          200 <span>SLP</span>
+        </strong>
+        <span>USDT $40</span>
+      </div>
+      <h3>Total:</h3>
+      <div className="group">
+        <strong>
+          3000 <span>SLP</span>
+        </strong>
+        <span>USDT $40</span>
+      </div>
+      <h3>Profit (50%):</h3>
+      <span>USDT $20</span>
     </div>
   );
 };

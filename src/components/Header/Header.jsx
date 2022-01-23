@@ -8,6 +8,12 @@ const Header = () => {
     setMenuIsActive(!menuIsActive);
   };
 
+  const closeMenu = (e) => {
+    if (e.target.className === "menu") {
+      toggleMenu();
+    }
+  };
+
   return (
     <header>
       <div className="text">
@@ -29,8 +35,7 @@ const Header = () => {
           <span className="hamburger-inner"></span>
         </span>
       </button>
-
-      {/* <Menu /> */}
+      {menuIsActive ? <Menu closeMenu={closeMenu} /> : ""}
     </header>
   );
 };

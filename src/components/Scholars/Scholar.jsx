@@ -1,86 +1,95 @@
-import { ReactComponent as Copy } from "../images/copy.svg";
-import slp from "../images/smooth-love-potion.png";
+import PFP from "../../images/pfp.png";
+import { ReactComponent as IconCopy } from "../../images/copy.svg";
+import { ReactComponent as IconTrophy } from "../../images/trophy.svg";
+import { useState } from "react";
 
-const Record = ({ account, lastPrice, deleteAccount }) => {
-  const {
-    in_game_slp,
-    last_claim,
-    lifetime_slp,
-    mmr,
-    name,
-    next_claim,
-    rank,
-    ronin,
-    ronin_slp,
-    total_slp,
-  } = account;
+const Scholar = ({ account, lastPrice, deleteAccount }) => {
+  const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
+  // const {
+  //   in_game_slp,
+  //   last_claim,
+  //   lifetime_slp,
+  //   mmr,
+  //   name,
+  //   next_claim,
+  //   rank,
+  //   ronin,
+  //   ronin_slp,
+  //   total_slp,
+  // } = account;
 
-  const handleClick = () => {
-    deleteAccount(ronin);
-  };
+  // const handleClick = () => {
+  //   deleteAccount(ronin);
+  // };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(ronin);
+  // const handleCopy = () => {
+  //   navigator.clipboard.writeText(ronin);
+  // };
+
+  const toggleDropdown = () => {
+    setDropdownIsOpen(!dropdownIsOpen);
   };
 
   return (
-    <div className="record">
-      <h3>Name: {name}</h3>
-      <div className="wallet">
-        <span>Wallet:</span>
-        <a
-          href={`https://marketplace.axieinfinity.com/profile/${ronin}/axie`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {ronin}
-        </a>
-        <button onClick={handleCopy}>
-          <Copy />
-        </button>
+    <div className="scholar">
+      <div className="account-details" onClick={toggleDropdown}>
+        <div className="profile-picture">
+          <img src={PFP} alt="pfp" />
+        </div>
+        <div className="upper">
+          <p className="name">Nanahoshi gaming pro master hd</p>
+          <div className="mmr">
+            <IconTrophy />
+            <p>1300</p>
+          </div>
+          <p className="slp">500 SLP</p>
+        </div>
+        <div className="lower">
+          <p className="rank">
+            Rank: <span>#1873244</span>
+          </p>
+          <p className="next-claim">Next Claim in: 10 day(s)</p>
+        </div>
       </div>
-
-      <p>
-        <span>MMR:</span>
-        <strong>{mmr}</strong>
-      </p>
-      <p>
-        <span>Rank: </span>
-        <strong>#{rank}</strong>
-      </p>
-      <p>
-        <span>SLP in Game:</span>
-        <strong>{in_game_slp}</strong>
-      </p>
-      <p>
-        <span>SLP in RONIN wallet:</span>
-        <strong>{ronin_slp}</strong>
-      </p>
-      <p className="total">
-        <img src={slp} alt="" />
-        <span>SLP:</span> <strong>{total_slp}</strong>
-        <span>${(total_slp * lastPrice).toFixed(4)}</span>
-      </p>
-
-      <p className="claim">
-        <span>Last Claim: </span>
-        <strong>{new Date(last_claim * 1000).toLocaleDateString()}</strong>
-      </p>
-      <p className="claim">
-        <span>Next Claim:</span>{" "}
-        <strong>{new Date(next_claim * 1000).toLocaleDateString()}</strong>
-      </p>
-
-      <p>
-        <span>Lifetime SLP:</span>
-        <strong>{lifetime_slp}</strong>
-      </p>
-
-      <button className="delete" onClick={handleClick}>
-        Delete
-      </button>
+      {dropdownIsOpen && (
+        <div className="dropdown">
+          <div className="wallet">
+            <a
+              href={`https://marketplace.axieinfinity.com/profile/${"ronin"}/axie`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {"ronin:0xedb136a58e616c0443988d2897af59aa17045045"}
+            </a>
+            <button>
+              <IconCopy />
+            </button>
+          </div>
+          <div className="statistics">
+            <div className="element">
+              <p>Last Claim</p>
+              <strong>02/02</strong>
+            </div>
+            <div className="element">
+              <p>Next Claim</p>
+              <strong>02/02</strong>
+            </div>
+            <div className="element">
+              <p>Average</p>
+              <strong>{`400 SLP`}</strong>
+            </div>
+            <div className="element">
+              <p>Lifetime SLP</p>
+              <strong>{`100200`}</strong>
+            </div>
+          </div>
+          <div className="delete-account">
+            <button>Delete Scholar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default Record;
+export default Scholar;

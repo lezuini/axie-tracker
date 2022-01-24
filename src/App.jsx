@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import FeaturedView from "./components/FeatureView/FeaturedView";
-import Header from "./components/Header/Header";
-// import AddressAggregator from "./components/AddressAggregator";
-// import Records from "./components/Records";
-// import Summary from "./components/Summary";
 import "./sass/App.scss";
 
 import { TokenDataContext } from "./contexts/TokenDataContext";
 import { AddresesContext } from "./contexts/AddresesContext";
+
+import Header from "./components/Header/Header";
+import FeaturedView from "./components/FeatureView/FeaturedView";
+import ScholarsSection from "./components/Scholars/ScholarsSection";
 
 function App() {
   const GAME_API = "https://game-api.axie.technology/api/v1/";
@@ -66,37 +65,33 @@ function App() {
   //   }
   // }, [addresses]);
 
-  const getTokenDataContext = {
-    symbol: "SLPUSDT",
-    priceChange: "-0.00290000",
-    priceChangePercent: "-19.205",
-    weightedAvgPrice: "0.01212706",
-    prevClosePrice: "0.01510000",
-    lastPrice: "0.01220000",
-    lastQty: "2240.00000000",
-    bidPrice: "0.01210000",
-    bidQty: "7708082.00000000",
-    askPrice: "0.01220000",
-    askQty: "393387.00000000",
-    openPrice: "0.01510000",
-    highPrice: "0.01520000",
-    lowPrice: "0.01050000",
-    volume: "4242185392.00000000",
-    quoteVolume: "51445216.07270000",
-    openTime: 1642792457786,
-    closeTime: 1642878857786,
-    firstId: 57913756,
-    lastId: 58036612,
-    count: 122857,
-  };
+  //------------------token context only--------------
+
+  const [tokenData, setTokenData] = useState(null);
+
+  const setContext = useCallback(
+    (update) => {
+      setTokenData(update);
+    },
+    [setTokenData]
+  );
+
+  const getTokenContextValue = useCallback(
+    () => ({
+      tokenData,
+      setContext,
+    }),
+    [tokenData, setContext]
+  );
 
   return (
     <main className="app">
       <div className="container">
         <Header />
-        <TokenDataContext.Provider value={getTokenDataContext}>
+        <TokenDataContext.Provider value={getTokenContextValue()}>
           <AddresesContext.Provider value={"qa"}>
             <FeaturedView />
+            <ScholarsSection />
           </AddresesContext.Provider>
         </TokenDataContext.Provider>
         {/* <AddressAggregator updateAddresses={updateAddresses} />

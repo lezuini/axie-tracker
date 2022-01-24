@@ -1,0 +1,82 @@
+.scholars-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  padding: 20px;
+
+  .separator {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    border-bottom: 2px solid gray;
+    color: yellow;
+
+    .title {
+      height: 60px;
+
+      border-bottom: 2px solid yellow;
+      margin-bottom: -2px;
+
+      h3 {
+        height: 100%;
+        padding: 1rem;
+      }
+    }
+  }
+
+  .accounts-section {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .expander {
+      height: 42px;
+      width: 100%;
+      background-color: #2d2f3c;
+      border: none;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      color: #8990a3;
+
+      padding: 0 6px 0 1rem;
+
+      cursor: pointer;
+
+      p {
+        text-align: left;
+        font-size: 16px;
+        line-height: 16px;
+      }
+
+      .icon {
+        background-color: #353842;
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: #797c86;
+
+        &:hover {
+          background-color: #5d6374;
+        }
+
+        svg {
+          height: 24px;
+          width: 24px;
+        }
+      }
+    }
+  }
+}

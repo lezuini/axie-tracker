@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import IconSLP from "../../images/icon-slp.png";
 import IconAXS from "../../images/icon-axs.png";
+
 import { ReactComponent as Caret } from "../../images/caret.svg";
+
+import { TokenDataContext } from "../../contexts/TokenDataContext";
 
 const TokenPriceStatistics = ({ api, token }) => {
   const [tokenData, setTokenData] = useState(null);
@@ -13,7 +16,7 @@ const TokenPriceStatistics = ({ api, token }) => {
 
       const json = await res.json();
 
-      console.log(json);
+      // console.log(json);
       setTokenData(json);
     };
 
@@ -21,6 +24,22 @@ const TokenPriceStatistics = ({ api, token }) => {
 
     return () => {};
   }, [api, token]);
+
+  const context = useContext(TokenDataContext);
+
+  useEffect(() => {
+    if (
+      tokenData &&
+      tokenData.symbol === "SLPUSDT" &&
+      context.tokenData !== tokenData
+    ) {
+      context.setContext(tokenData);
+    }
+    // this is only for testing
+    else if (tokenData && tokenData.symbol === "SLPUSDT") {
+      console.log(context.tokenData, "hiii");
+    }
+  }, [context, tokenData]);
 
   const toSmallNumber = (string, decimalSize) => {
     return Number(string).toFixed(decimalSize);
@@ -47,11 +66,11 @@ const TokenPriceStatistics = ({ api, token }) => {
             token === "SLP" ? 4 : 2
           )}`}</strong>
           <div
-            className={
+            className={`priceChange ${
               Math.sign(tokenData.priceChangePercent) === -1
-                ? "priceChange negative"
-                : "priceChange positive"
-            }
+                ? "negative"
+                : "positive"
+            }`}
           >
             <span>{`${toSmallNumber(tokenData.priceChangePercent, 2)}%`}</span>
             <Caret />

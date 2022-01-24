@@ -38,9 +38,19 @@ html {
   align-items: flex-start;
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(135deg, #313440, #22252f);
   color: #000;
 
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -10;
+
+    width: 360px;
+    height: 105vh;
+    background: linear-gradient(135deg, #313440, #22252f);
+  }
   // padding: 0.5rem;
 
   &.container {

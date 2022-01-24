@@ -1,0 +1,215 @@
+.scholar {
+  background-color: transparent;
+  width: 100%;
+
+  border-bottom: 1px solid #343645;
+
+  .account-details {
+    background-color: transparent;
+    padding: 1rem 0;
+    padding-left: 58px;
+
+    border-radius: 6px;
+    cursor: pointer;
+
+    position: relative;
+
+    .profile-picture {
+      position: absolute;
+      top: 16px;
+      left: 0;
+
+      height: 42px;
+      width: 42px;
+      overflow: hidden;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        height: 100%;
+      }
+    }
+
+    .upper {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-weight: bold;
+
+      margin-bottom: 0.5rem;
+
+      .name {
+        font-size: 16px;
+        line-height: 16px;
+        color: #8990a3;
+
+        margin-right: 0.5rem;
+        text-overflow: ellipsis;
+
+        max-width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .mmr {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-right: auto;
+
+        svg {
+          width: 16px;
+          height: 16px;
+          fill: #ffbb00;
+          margin-right: 0.25rem;
+        }
+        p {
+          font-size: 14px;
+          line-height: 14px;
+          color: transparent;
+          background: linear-gradient(to right, #ffbb00, #ff9900);
+          background-clip: text;
+        }
+      }
+      .slp {
+        font-size: 20px;
+        line-height: 20px;
+        color: #fff;
+      }
+    }
+
+    .lower {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: 12px;
+      line-height: 12px;
+
+      .rank {
+        color: #676d7a;
+
+        span {
+          color: #8990a3;
+        }
+      }
+
+      .next-claim {
+        color: #676d7a;
+      }
+    }
+  }
+
+  .dropdown {
+    opacity: 0;
+
+    animation: appear 0.2s ease-in-out forwards;
+
+    @keyframes appear {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 100;
+      }
+    }
+  }
+
+  .wallet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0;
+    background-color: #2d2f3c;
+    padding: 0 6px 0 8px;
+    height: 42px;
+
+    border-radius: 6px;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+
+      font-size: 14px;
+      line-height: 42px;
+      font-weight: 400;
+
+      height: 100%;
+      padding: 0 8px;
+
+      max-width: 260px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 6px;
+      height: 30px;
+      width: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      background-color: #353842;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        color: #797c86;
+      }
+    }
+  }
+
+  .statistics {
+    border-radius: 6px;
+    border: 1px solid #343645;
+    background-color: #272a34;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 16px;
+
+    color: #fff;
+
+    .element {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 64px;
+
+      p {
+        font-size: 12px;
+        line-height: 12px;
+        font-weight: 400;
+        margin-bottom: 8px;
+
+        color: #8990a3;
+      }
+      strong {
+        font-size: 12px;
+        line-height: 12px;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .delete-account {
+    width: 100%;
+    margin: 1rem 0;
+
+    button {
+      width: 100%;
+      height: 42px;
+      background-color: red;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+}

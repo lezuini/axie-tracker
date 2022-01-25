@@ -10,7 +10,7 @@ const FeaturedView = () => {
     <div className="featuredView">
       <TokenPriceStatistics api={BINANCE_API} token="SLP" />
       <PerformanceSummary />
-      {/* <TokenPriceStatistics api={BINANCE_API} token="AXS" /> */}
+      <TokenPriceStatistics api={BINANCE_API} token="AXS" />
     </div>
   );
 };

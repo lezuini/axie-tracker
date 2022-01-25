@@ -1,10 +1,12 @@
 import PFP from "../../images/pfp.png";
 import { ReactComponent as IconCopy } from "../../images/copy.svg";
+import { ReactComponent as IconOpen } from "../../images/open-outline.svg";
 import { ReactComponent as IconTrophy } from "../../images/trophy.svg";
 import { useState } from "react";
 
 const Scholar = ({ account, lastPrice, deleteAccount }) => {
-  const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
+  const [dropdownIsOpen, setDropdownIsOpen] = useState(true);
+
   // const {
   //   in_game_slp,
   //   last_claim,
@@ -22,9 +24,9 @@ const Scholar = ({ account, lastPrice, deleteAccount }) => {
   //   deleteAccount(ronin);
   // };
 
-  // const handleCopy = () => {
-  //   navigator.clipboard.writeText(ronin);
-  // };
+  const handleCopy = () => {
+    navigator.clipboard.writeText("a");
+  };
 
   const toggleDropdown = () => {
     setDropdownIsOpen(!dropdownIsOpen);
@@ -38,17 +40,22 @@ const Scholar = ({ account, lastPrice, deleteAccount }) => {
         </div>
         <div className="upper">
           <p className="name">Nanahoshi gaming pro master hd</p>
+          <p className="slp">500 SLP</p>
+        </div>
+        <div className="middle">
           <div className="mmr">
             <IconTrophy />
             <p>1300</p>
           </div>
-          <p className="slp">500 SLP</p>
+          <p className="usdt">USDT 40$</p>
         </div>
         <div className="lower">
           <p className="rank">
             Rank: <span>#1873244</span>
           </p>
-          <p className="next-claim">Next Claim in: 10 day(s)</p>
+          <p className="next-claim">
+            Next Claim in: <span>10</span> day(s)
+          </p>
         </div>
       </div>
       {dropdownIsOpen && (
@@ -59,9 +66,10 @@ const Scholar = ({ account, lastPrice, deleteAccount }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {"ronin:0xedb136a58e616c0443988d2897af59aa17045045"}
+              <p>{"ronin:0xedb136a58e616c0443988d2897af59aa17045045"}</p>
+              <IconOpen />
             </a>
-            <button>
+            <button className="copy-btn" onMouseUp={handleCopy}>
               <IconCopy />
             </button>
           </div>

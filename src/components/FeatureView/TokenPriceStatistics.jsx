@@ -3,7 +3,8 @@ import React, { useContext, useEffect, useState } from "react";
 import IconSLP from "../../images/icon-slp.png";
 import IconAXS from "../../images/icon-axs.png";
 
-import { ReactComponent as Caret } from "../../images/caret.svg";
+import { ReactComponent as IconCaret } from "../../images/caret.svg";
+import { ReactComponent as IconCaretCircle } from "../../images/caret-down-circle.svg";
 
 import { TokenDataContext } from "../../contexts/TokenDataContext";
 
@@ -73,7 +74,23 @@ const TokenPriceStatistics = ({ api, token }) => {
             }`}
           >
             <span>{`${toSmallNumber(tokenData.priceChangePercent, 2)}%`}</span>
-            <Caret />
+            <IconCaret />
+          </div>
+          <div className="price-lowhigh">
+            <div className="element">
+              <IconCaretCircle className="inverted" />
+              <p>{`$${toSmallNumber(
+                tokenData.highPrice,
+                token === "SLP" ? 4 : 2
+              )}`}</p>
+            </div>
+            <div className="element">
+              <IconCaretCircle />
+              <p>{`$${toSmallNumber(
+                tokenData.lowPrice,
+                token === "SLP" ? 4 : 2
+              )}`}</p>
+            </div>
           </div>
         </>
       ) : (

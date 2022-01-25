@@ -1,6 +1,6 @@
 .token-card {
   width: 162px;
-  height: 152px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -96,6 +96,41 @@
       svg {
         fill: red;
         transform: rotateZ(180deg);
+      }
+    }
+  }
+
+  .price-lowhigh {
+    margin-top: 0.5rem;
+
+    font-size: 12px;
+    line-height: 12px;
+
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    .element {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      margin-top: 0.25rem;
+      margin-right: 0.5rem;
+
+      svg {
+        width: 16px;
+        height: 16px;
+        fill: red;
+        color: red;
+        margin-right: 0.25rem;
+
+        &.inverted {
+          transform: rotateZ(180deg);
+          fill: green;
+          color: green;
+        }
       }
     }
   }

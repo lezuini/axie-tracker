@@ -1,43 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Scholar from "./Scholar";
 
 import { ReactComponent as IconResize } from "../../images/resize.svg";
 
-const ScholarsSection = ({
-  binanceData,
-  gameData,
-  addresses,
-  setAddresses,
-}) => {
-  // const { lastPrice } = binanceData;
+import { TokenDataContext } from "../../contexts/TokenDataContext";
+import { AccountsContext } from "../../contexts/AccountsContext";
 
-  // const [accounts, setAccounts] = useState([]);
+const ScholarsSection = () => {
+  const { tokenData } = useContext(TokenDataContext);
+  const accountsData = useContext(AccountsContext);
 
-  // const deleteAccount = (ronin) => {
-  //   // let newAccounts = accounts.filter((account) => {
-  //   //   return account.ronin !== ronin;
-  //   // });
-
-  //   let newAddresses = addresses.filter((address) => {
-  //     return address !== ronin;
-  //   });
-
-  //   setAddresses(newAddresses);
-  //   // setAccounts(newAccounts);
-  // };
-
-  // useEffect(() => {
-  //   let array = [];
-
-  //   for (let property in gameData) {
-  //     gameData[property].ronin = "ronin:" + property.slice(2);
-  //     console.log(gameData[property].name);
-  //     array.push(gameData[property]);
-  //   }
-  //   setAccounts([...array]);
-  // }, [gameData]);
-
-  // console.log(accounts);
+  const deleteAccount = () => {};
 
   return (
     <section className="scholars-section">
@@ -48,25 +21,26 @@ const ScholarsSection = ({
       </div>
       <div className="accounts-section">
         <button className="expander">
-          <p>Total accounts 5</p>
+          <p>Total accounts {accountsData.length}</p>
           <div className="icon">
             <IconResize />
           </div>
         </button>
         <div className="accounts">
-          <Scholar />
+          {accountsData &&
+            tokenData &&
+            accountsData.map((account, i) => {
+              return (
+                <Scholar
+                  account={account}
+                  key={i}
+                  lastPrice={tokenData.lastPrice}
+                  deleteAccount={deleteAccount}
+                />
+              );
+            })}
         </div>
       </div>
-      {/* {accounts.map((account, i) => {
-        return (
-          <Record
-            account={account}
-            lastPrice={lastPrice}
-            key={i}
-            deleteAccount={deleteAccount}
-          />
-        );
-      })} */}
     </section>
   );
 };

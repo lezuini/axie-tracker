@@ -18,17 +18,28 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: space-between;
 
     width: 80%;
-    height: 400px;
+    height: 448px;
     border-radius: 6px;
-    padding: 16px;
+    padding: 1.5rem 16px;
 
     background-color: #313440;
 
+    h3 {
+      font-size: 18px;
+      line-height: 18px;
+      margin-bottom: 1rem;
+    }
+
     label {
       margin-bottom: 1rem;
+
+      p {
+        font-size: 16px;
+        line-height: 18px;
+      }
     }
 
     .address-area {
@@ -44,7 +55,15 @@
         border-radius: 6px;
         padding: 16px;
 
+        font-size: 16px;
+        line-height: 18px;
+
         resize: none;
+
+        &::placeholder {
+          font-size: 16px;
+          line-height: 18px;
+        }
       }
 
       button {
@@ -55,6 +74,22 @@
         right: 16px;
         padding: 6px;
         cursor: pointer;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
+
+        p {
+          font-size: 14px;
+          line-height: 14px;
+          margin-right: 0.25rem;
+        }
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
       }
     }
 
@@ -66,10 +101,14 @@
       width: 100%;
 
       button {
-        padding: 1rem;
+        padding: 1rem 0;
         cursor: pointer;
         width: 45%;
         text-align: center;
+
+        text-transform: capitalize;
+        font-size: 14px;
+        line-height: 14px;
       }
     }
   }

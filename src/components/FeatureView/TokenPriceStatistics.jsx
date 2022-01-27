@@ -37,9 +37,9 @@ const TokenPriceStatistics = ({ api, token }) => {
       context.setContext(tokenData);
     }
     // this is only for testing
-    else if (tokenData && tokenData.symbol === "SLPUSDT") {
-      console.log(context.tokenData, "hiii");
-    }
+    // else if (tokenData && tokenData.symbol === "SLPUSDT") {
+    //    console.log(context.tokenData, "hiii");
+    // }
   }, [context, tokenData]);
 
   const toSmallNumber = (string, decimalSize) => {

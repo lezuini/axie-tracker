@@ -21,7 +21,7 @@ const ScholarsSection = () => {
       </div>
       <div className="accounts-section">
         <button className="expander">
-          <p>Total accounts {accountsData.length}</p>
+          <p>Total accounts {accountsData ? accountsData.length : undefined}</p>
           <div className="icon">
             <IconResize />
           </div>

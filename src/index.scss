@@ -1,4 +1,4 @@
-@use "./sass/hamburgers/hamburgers.scss";
+@import-normalize;
 
 *,
 *::before,
@@ -53,8 +53,18 @@ html {
   }
   // padding: 0.5rem;
 
-  &.container {
+  & > .container {
     width: 100%;
     height: 100%;
+    position: relative;
   }
+}
+
+#test-toggle {
+  position: fixed;
+
+  z-index: 50;
+
+  bottom: 3rem;
+  right: 3rem;
 }

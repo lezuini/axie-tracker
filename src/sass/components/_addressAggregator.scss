@@ -1,5 +1,6 @@
 .aggregator {
-  position: absolute;
+  position: sticky;
+  z-index: 200;
 
   top: 0;
   left: 0;
@@ -20,8 +21,8 @@
     align-items: flex-start;
     justify-content: space-between;
 
-    width: 80%;
-    height: 448px;
+    width: calc(100% - 2rem);
+    height: 464px;
     border-radius: 6px;
     padding: 1.5rem 16px;
 
@@ -46,11 +47,16 @@
       position: relative;
       width: 100%;
       height: 200px;
-      margin-bottom: 16px;
+      margin-bottom: 0.5rem;
+      border-radius: 6px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       textarea {
         width: 100%;
-        min-height: 200px;
+        height: 200px;
         border: none;
         border-radius: 6px;
         padding: 16px;
@@ -59,37 +65,28 @@
         line-height: 18px;
 
         resize: none;
+        position: relative;
 
         &::placeholder {
           font-size: 16px;
           line-height: 18px;
         }
+
+        &.error {
+          outline: 2px solid #ff0000;
+        }
       }
+    }
 
-      button {
-        position: absolute;
-        border: none;
-        border-radius: 4px;
-        bottom: 16px;
-        right: 16px;
-        padding: 6px;
-        cursor: pointer;
+    .notifications {
+      margin-bottom: 1.5rem;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0.5rem;
+      p {
+        color: rgb(255, 45, 45);
+        font-size: 16px;
+        line-height: 20px;
 
-        p {
-          font-size: 14px;
-          line-height: 14px;
-          margin-right: 0.25rem;
-        }
-
-        svg {
-          width: 16px;
-          height: 16px;
-        }
+        // font-weight: bold;
       }
     }
 
@@ -101,14 +98,18 @@
       width: 100%;
 
       button {
-        padding: 1rem 0;
+        padding: 1rem;
         cursor: pointer;
-        width: 45%;
+        min-width: 40%;
         text-align: center;
 
+        background-color: white;
+        border: none;
+        border-radius: 4px;
+
         text-transform: capitalize;
-        font-size: 14px;
-        line-height: 14px;
+        font-size: 16px;
+        line-height: 16px;
       }
     }
   }

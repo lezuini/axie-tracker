@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AddressAggregator from "./AddressAggregator";
+import AddressAggregator from "../AddressAggregator";
 
 const Menu = ({ closeMenu }) => {
   const [aggregatorIsOpen, setAggregatorIsOpen] = useState(false);
@@ -21,17 +21,18 @@ const Menu = ({ closeMenu }) => {
         }}
       >
         <ul>
-          <li>
+          <h3>Menu</h3>
+          {/* <li>
             <button onClick={toggleAggregator}>Add new address</button>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <button onClick={toggleConfig}>Settings</button>
-          </li>
+          </li> */}
         </ul>
       </div>
-      {aggregatorIsOpen && (
+      {/* {aggregatorIsOpen && (
         <AddressAggregator toggleAggregator={toggleAggregator} />
-      )}
+      )} */}
     </>
   );
 };

@@ -1,0 +1,44 @@
+.one-screen {
+  position: fixed;
+  top: 0;
+  left: 100%;
+
+  height: 90vh;
+  width: 100%;
+  background-color: red;
+
+  #aggregatorToggleBtn {
+    position: absolute;
+    bottom: 1rem;
+    left: calc(-48px - 1rem);
+    z-index: 50;
+
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    background-color: green;
+    color: #fff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background-color: forestgreen;
+    }
+
+    svg {
+      height: 28px;
+      width: 28px;
+
+      transition: transform 0.2s ease-in-out;
+    }
+
+    &.active svg {
+      transform: rotateZ(135deg);
+    }
+  }
+}

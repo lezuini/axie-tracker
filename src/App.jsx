@@ -11,6 +11,7 @@ import FeaturedView from "./components/FeatureView/FeaturedView";
 import ScholarsSection from "./components/Scholars/ScholarsSection";
 
 import AddressAggregator from "./components/AddressAggregator";
+import AddButton from "./components/AddButton";
 
 function App() {
   const GAME_API = "https://game-api.axie.technology/api/v1/";
@@ -87,10 +88,10 @@ function App() {
     // console.log("a<aaa");
   }, [addresses]);
 
-  const [agg, setAgg] = useState(false);
+  const [aggregatorIsActive, setAggregatorIsActive] = useState(false);
 
   const toggleAggregator = () => {
-    setAgg(!agg);
+    setAggregatorIsActive(!aggregatorIsActive);
   };
 
   return (
@@ -98,10 +99,14 @@ function App() {
       <div className="container">
         <AddressesContext.Provider value={setAddressesArray}>
           <Header />
-          {agg && <AddressAggregator toggleAggregator={toggleAggregator} />}
-          <button id="test-toggle" onMouseUp={toggleAggregator}>
-            Toggle Aggregator
-          </button>
+          {aggregatorIsActive && (
+            <AddressAggregator toggleAggregator={toggleAggregator} />
+          )}
+
+          <AddButton
+            toggleAggregator={toggleAggregator}
+            aggregatorIsActive={aggregatorIsActive}
+          />
 
           <TokenDataContext.Provider value={getTokenContextValue()}>
             <AccountsContext.Provider value={accountsData}>

@@ -4,12 +4,23 @@ import { AddressesContext } from "../contexts/AddressesContext";
 
 const AddressAggregator = ({ toggleAggregator }) => {
   const [textareaContent, setTextareaContent] = useState(
-    "ronin:edb136a58e616c0443988d2897af59aa17045045 ronin:e6f4661ce451287042433da5aead165f0b7af11e ronin:ronan:"
+    "ronin:edb136a58e616c0443988d2897af59aa17045045 ronin:e6f4661ce451287042433da5aead165f0b7af11e"
   );
   const [roninDirections, setRoninDirections] = useState(null);
+  const [invalidEntries, setInvalidEntries] = useState(null);
 
-  const handleChange = (e) => {
+  const closeAggregator = (e) => {
+    if (e.target.className === "aggregator") {
+      toggleAggregator();
+    }
+  };
+
+  const handleTextChange = (e) => {
     setTextareaContent(e.target.value);
+
+    if (invalidEntries !== null) {
+      setInvalidEntries(null);
+    }
   };
 
   //Check address structure to match a valid ronin address
@@ -40,34 +51,36 @@ const AddressAggregator = ({ toggleAggregator }) => {
     const array = string.split(" ");
 
     const arrayOfAddresses = [];
+    let invalidEntries = 0;
 
     for (let i = 0; i < array.length; i++) {
       let isAnAddress = addressChecker(array[i]);
 
       if (isAnAddress) {
         arrayOfAddresses.push(array[i]);
+      } else {
+        invalidEntries++;
       }
     }
 
-    return arrayOfAddresses;
+    return [arrayOfAddresses, invalidEntries];
   };
 
   //Start textarea checks and update valid addresses
   const verifyAddresses = () => {
-    const parserResponse = addressParser();
+    const [parserResponse, invalidEntries] = addressParser();
 
     if (parserResponse.length !== 0) {
-      setRoninDirections(parserResponse);
+      if (invalidEntries === 0) {
+        setInvalidEntries(0);
+        // setRoninDirections(parserResponse);
+      } else {
+        setInvalidEntries(invalidEntries);
+      }
     } else {
-      console.log("No valid addresses detected");
+      setInvalidEntries(-1);
     }
   };
-
-  const setContext = useContext(AddressesContext);
-
-  useEffect(() => {
-    setContext(roninDirections);
-  }, [setContext, roninDirections]);
 
   const verifyByHittingEnter = (e) => {
     if (e.key === "Enter") {
@@ -76,16 +89,18 @@ const AddressAggregator = ({ toggleAggregator }) => {
     }
   };
 
-  const closeAggregator = (e) => {
-    if (e.target.className === "aggregator") {
-      toggleAggregator();
-    }
-  };
+  //---------------------- to change -----------------------
+
+  const setContext = useContext(AddressesContext);
+
+  useEffect(() => {
+    setContext(roninDirections);
+  }, [setContext, roninDirections]);
 
   return (
     <div className="aggregator" onClickCapture={closeAggregator}>
       <div className="container">
-        <h3>Add new address</h3>
+        <h3>Add new address(es)</h3>
         <label htmlFor="addressAggregator">
           <p>
             You can add one or more ronin addresses by separating them with a
@@ -95,20 +110,34 @@ const AddressAggregator = ({ toggleAggregator }) => {
         <div className="address-area">
           <textarea
             id="addressAggregator"
-            className="error"
+            className={
+              invalidEntries !== null
+                ? invalidEntries > 0 || invalidEntries !== 0
+                  ? "error"
+                  : "correct"
+                : undefined
+            }
             type="text"
             value={textareaContent}
-            onChange={handleChange}
+            onChange={handleTextChange}
             onKeyUp={verifyByHittingEnter}
             placeholder={`A ronin address should look like this:
             ronin:edb136a58e616c0443988d2897af59aa17045045`}
           />
         </div>
         <div className="notifications">
-          <p>test text</p>
-          {/* <p>no valid addresses detected</p> */}
-          {/* <p>some addresses are invalid</p>
-          <p>an address is not valid</p> */}
+          {invalidEntries !== null &&
+            (invalidEntries > 0 ? (
+              invalidEntries === 1 ? (
+                <p>An address is not valid</p>
+              ) : (
+                <p>Some addresses are invalid</p>
+              )
+            ) : invalidEntries !== 0 ? (
+              <p>No valid addresses detected</p>
+            ) : (
+              <p className="correct">Seems good</p>
+            ))}
         </div>
         <div className="buttons">
           <button
@@ -118,8 +147,7 @@ const AddressAggregator = ({ toggleAggregator }) => {
           >
             Cancel
           </button>
-          {/* <button onClick={verifyAddresses}>Add address</button> */}
-          <button onClick={verifyAddresses}>add address(es)</button>
+          <button onClick={verifyAddresses}>Add address(es)</button>
         </div>
       </div>
     </div>

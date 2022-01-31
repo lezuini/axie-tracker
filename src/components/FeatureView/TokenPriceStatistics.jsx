@@ -3,12 +3,14 @@ import React, { useContext, useEffect, useState } from "react";
 import IconSLP from "../../images/icon-slp.png";
 import IconAXS from "../../images/icon-axs.png";
 
+import { toSmallNumber } from "../../helpers/utilities";
+
 import { ReactComponent as IconCaret } from "../../images/caret.svg";
 import { ReactComponent as IconCaretCircle } from "../../images/caret-down-circle.svg";
 
 import { TokenDataContext } from "../../contexts/TokenDataContext";
 
-const TokenPriceStatistics = ({ api, token }) => {
+const TokenPriceStatistics = ({ tokenUpdater, api, token }) => {
   const [tokenData, setTokenData] = useState(null);
 
   useEffect(() => {
@@ -17,14 +19,13 @@ const TokenPriceStatistics = ({ api, token }) => {
 
       const json = await res.json();
 
-      // console.log(json);
       setTokenData(json);
     };
 
     getTokenData();
 
     return () => {};
-  }, [api, token]);
+  }, [tokenUpdater, api, token]);
 
   const context = useContext(TokenDataContext);
 
@@ -36,15 +37,7 @@ const TokenPriceStatistics = ({ api, token }) => {
     ) {
       context.setContext(tokenData);
     }
-    // this is only for testing
-    // else if (tokenData && tokenData.symbol === "SLPUSDT") {
-    //    console.log(context.tokenData, "hiii");
-    // }
   }, [context, tokenData]);
-
-  const toSmallNumber = (string, decimalSize) => {
-    return Number(string).toFixed(decimalSize);
-  };
 
   return (
     <div className="token-card">

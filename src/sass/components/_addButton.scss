@@ -2,6 +2,7 @@
   position: fixed;
   top: 0;
   left: 100%;
+  z-index: 80;
 
   height: 90vh;
   width: 100%;
@@ -9,12 +10,11 @@
 
   #aggregatorToggleBtn {
     position: absolute;
-    bottom: 1rem;
-    left: calc(-48px - 1rem);
-    z-index: 50;
+    bottom: -1rem;
+    left: calc(-52px - 1rem);
 
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -31,8 +31,8 @@
     }
 
     svg {
-      height: 28px;
-      width: 28px;
+      height: 32px;
+      width: 32px;
 
       transition: transform 0.2s ease-in-out;
     }

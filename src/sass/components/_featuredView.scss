@@ -1,18 +1,60 @@
 .featuredView {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 176px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 
-  justify-items: center;
-  align-items: stretch;
+  padding-top: 84px;
 
-  padding: 20px;
-  margin-top: 84px;
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    margin-left: auto;
+    margin-right: 20px;
 
-  gap: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  .summary {
-    grid-column: 2 / span 1;
-    grid-row: 1 / span 2;
+    cursor: pointer;
+
+    background-color: #141925;
+    color: #fff;
+
+    &:hover {
+      background-color: #2b3650;
+    }
+    &:active {
+      background-color: #3c4b6e;
+    }
+
+    p {
+      font-size: 14px;
+      margin-right: 0.5rem;
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 176px);
+
+    justify-items: center;
+    align-items: stretch;
+
+    padding: 20px;
+
+    gap: 12px;
+
+    .summary {
+      grid-column: 2 / span 1;
+      grid-row: 1 / span 2;
+    }
   }
 }

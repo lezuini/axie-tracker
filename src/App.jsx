@@ -4,7 +4,6 @@ import "./sass/App.scss";
 
 import { TokenDataContext } from "./contexts/TokenDataContext";
 import { AccountsContext } from "./contexts/AccountsContext";
-import { AddressesContext } from "./contexts/AddressesContext";
 
 import Header from "./components/Header/Header";
 import FeaturedView from "./components/FeatureView/FeaturedView";
@@ -15,6 +14,14 @@ import AddButton from "./components/AddButton";
 
 function App() {
   const GAME_API = "https://game-api.axie.technology/api/v1/";
+
+  const [aggregatorIsActive, setAggregatorIsActive] = useState(false);
+  const [roninDirections, setRoninDirections] = useState(null);
+  const [accountUpdater, setAccountUpdater] = useState(null);
+
+  const toggleAggregator = () => {
+    setAggregatorIsActive(!aggregatorIsActive);
+  };
 
   //------------------token context only--------------
 
@@ -35,35 +42,20 @@ function App() {
     [tokenData, setTokenContext]
   );
 
-  //------------------addresses context only--------------
-
-  const [addresses, setAddresses] = useState(null);
-
-  const setAddressesArray = useCallback(
-    (newData) => {
-      setAddresses(newData);
-    },
-    [setAddresses]
-  );
-
   //------------------accounts context only--------------
 
   const [accountsData, setAccountsData] = useState(null);
 
-  //get account information
+  // Get account information
 
   useEffect(() => {
     const getAccountsDataFromAPI = async () => {
-      let string = addresses.join(",");
-
-      // console.log(string);
+      let string = roninDirections.join(",");
 
       const res = await fetch(GAME_API + string);
       const json = await res.json();
 
-      // console.log(json);
-
-      if (addresses.length === 1) {
+      if (roninDirections.length === 1) {
         json.ronin = string;
 
         setAccountsData([json]);
@@ -81,52 +73,52 @@ function App() {
       }
     };
 
-    if (addresses !== null) {
+    if (roninDirections !== null) {
       getAccountsDataFromAPI();
     }
+  }, [roninDirections, accountUpdater]);
 
-    // console.log("a<aaa");
-  }, [addresses]);
+  // Context
+  const setAccountsContext = useCallback(
+    (newData) => {
+      setRoninDirections(newData);
+    },
+    [setRoninDirections]
+  );
 
-  const [aggregatorIsActive, setAggregatorIsActive] = useState(false);
-
-  const toggleAggregator = () => {
-    setAggregatorIsActive(!aggregatorIsActive);
-  };
+  const getAccountsContext = useCallback(
+    () => ({
+      accountsData,
+      setContext: setAccountsContext,
+    }),
+    [accountsData, setAccountsContext]
+  );
 
   return (
     <main className="app">
       <div className="container">
-        <AddressesContext.Provider value={setAddressesArray}>
-          <Header />
-          {aggregatorIsActive && (
-            <AddressAggregator toggleAggregator={toggleAggregator} />
-          )}
+        <Header />
 
-          <AddButton
+        {/* This section is responsible for adding ronin addresses */}
+        {aggregatorIsActive && (
+          <AddressAggregator
             toggleAggregator={toggleAggregator}
-            aggregatorIsActive={aggregatorIsActive}
+            setRoninDirections={setRoninDirections}
           />
+        )}
 
-          <TokenDataContext.Provider value={getTokenContextValue()}>
-            <AccountsContext.Provider value={accountsData}>
-              <FeaturedView />
-              <ScholarsSection />
-            </AccountsContext.Provider>
-          </TokenDataContext.Provider>
-        </AddressesContext.Provider>
-        {/* <AddressAggregator updateAddresses={updateAddresses} />
-        {binanceData && gameData && (
-          <>
-            <Summary binanceData={binanceData} gameData={gameData} />
-            <Records
-              binanceData={binanceData}
-              gameData={gameData}
-              addresses={addresses}
-              setAddresses={setAddresses}
-            />
-          </>
-        )} */}
+        <AddButton
+          toggleAggregator={toggleAggregator}
+          aggregatorIsActive={aggregatorIsActive}
+        />
+
+        {/* These sections show the data obtained */}
+        <TokenDataContext.Provider value={getTokenContextValue()}>
+          <AccountsContext.Provider value={getAccountsContext()}>
+            <FeaturedView setAccountUpdater={setAccountUpdater} />
+            <ScholarsSection />
+          </AccountsContext.Provider>
+        </TokenDataContext.Provider>
       </div>
     </main>
   );

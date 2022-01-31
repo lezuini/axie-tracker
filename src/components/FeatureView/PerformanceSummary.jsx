@@ -1,62 +1,85 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-// import slp from "../images/smooth-love-potion.png";
-// import { ReactComponent as Caret } from "../images/caret-up.svg";
+import { TokenDataContext } from "../../contexts/TokenDataContext";
+import { AccountsContext } from "../../contexts/AccountsContext";
 
-const PerformanceSummary = ({ binanceData, gameData }) => {
-  // const { lastPrice, priceChangePercent } = binanceData;
+import { toSmallNumber } from "../../helpers/utilities";
 
-  // const fixed = (string) => {
-  //   return Number(string).toFixed(4);
-  // };
+const PerformanceSummary = () => {
+  const { tokenData } = useContext(TokenDataContext);
+  const { accountsData } = useContext(AccountsContext);
 
-  // const [inGame, setInGame] = useState(0);
-  // const [ronin, setRonin] = useState(0);
-  // const [total, setTotal] = useState(0);
-  // const [price, setPrice] = useState(fixed(lastPrice));
+  const [tokensInAccounts, setTokensInAccounts] = useState({
+    inGame: 0,
+    ronin: 0,
+    total: 0,
+  });
 
-  // useEffect(() => {
-  //   let totalSLP = 0;
-  //   let roninSLP = 0;
-  //   let inGameSLP = 0;
+  useEffect(() => {
+    if (accountsData !== null) {
+      let sumOfSLP = 0;
+      let sumOfRoninSLP = 0;
 
-  //   for (let property in gameData) {
-  //     inGameSLP += gameData[property].in_game_slp;
-  //     roninSLP += gameData[property].ronin_slp;
-  //     totalSLP += gameData[property].total_slp;
-  //   }
+      accountsData.forEach((account) => {
+        sumOfSLP += account.in_game_slp;
+        sumOfRoninSLP += account.ronin_slp;
+      });
 
-  //   setInGame(inGameSLP);
-  //   setRonin(roninSLP);
-  //   setTotal(totalSLP);
-  // }, [gameData]);
+      setTokensInAccounts({
+        inGame: sumOfSLP,
+        ronin: sumOfRoninSLP,
+        total: sumOfSLP + sumOfRoninSLP,
+      });
+    }
+  }, [accountsData]);
 
   return (
     <div className="summary">
-      <h2>Scholars</h2>
-      <div className="group">
-        <p>In game:</p>
-        <strong>
-          400 <span>SLP</span>
-        </strong>
-        <span>USDT $80</span>
-      </div>
-      <div className="group">
-        <p>In wallet:</p>
-        <strong>
-          200 <span>SLP</span>
-        </strong>
-        <span>USDT $40</span>
-      </div>
-      <h3>Total:</h3>
-      <div className="group">
-        <strong>
-          3000 <span>SLP</span>
-        </strong>
-        <span>USDT $40</span>
-      </div>
-      <h3>Profit (50%):</h3>
-      <span>USDT $20</span>
+      {tokensInAccounts !== null && tokenData !== null && (
+        <>
+          <h2>Scholars</h2>
+          <div className="group">
+            <p>In game:</p>
+            <strong>
+              {tokensInAccounts.inGame} <span>SLP</span>
+            </strong>
+            <span>{`USDT $${toSmallNumber(
+              tokensInAccounts.inGame * tokenData.lastPrice,
+              2
+            )}`}</span>
+          </div>
+          <div className="group">
+            <p>In wallet:</p>
+            <strong>
+              {tokensInAccounts.ronin} <span>SLP</span>
+            </strong>
+            <span>{`USDT $${toSmallNumber(
+              tokensInAccounts.ronin * tokenData.lastPrice,
+              2
+            )}`}</span>
+          </div>
+          <h3>Total:</h3>
+          <div className="group">
+            <strong>
+              {tokensInAccounts.total} <span>SLP</span>
+            </strong>
+            <span>{`USDT $${toSmallNumber(
+              tokensInAccounts.total * tokenData.lastPrice,
+              2
+            )}`}</span>
+          </div>
+          <div className="profit">
+            <h3>Profit (50%):</h3>
+            <p>
+              {`$${toSmallNumber(
+                (tokensInAccounts.total * tokenData.lastPrice) / 2,
+                2
+              )}`}{" "}
+              <span>USDT</span>
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -1,12 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { AddressesContext } from "../contexts/AddressesContext";
-
-const AddressAggregator = ({ toggleAggregator }) => {
+const AddressAggregator = ({ toggleAggregator, setRoninDirections }) => {
   const [textareaContent, setTextareaContent] = useState(
-    "ronin:edb136a58e616c0443988d2897af59aa17045045 ronin:e6f4661ce451287042433da5aead165f0b7af11e"
+    "ronin:edb136a58e616c0443988d2897af59aa17045045 ronin:e6f4661ce451287042433da5aead165f0b7af11e ronin:02568d053eac680f786dde00c690404ace9686d5"
   );
-  const [roninDirections, setRoninDirections] = useState(null);
   const [invalidEntries, setInvalidEntries] = useState(null);
 
   const closeAggregator = (e) => {
@@ -73,7 +70,7 @@ const AddressAggregator = ({ toggleAggregator }) => {
     if (parserResponse.length !== 0) {
       if (invalidEntries === 0) {
         setInvalidEntries(0);
-        // setRoninDirections(parserResponse);
+        setRoninDirections(parserResponse);
       } else {
         setInvalidEntries(invalidEntries);
       }
@@ -89,13 +86,13 @@ const AddressAggregator = ({ toggleAggregator }) => {
     }
   };
 
-  //---------------------- to change -----------------------
-
-  const setContext = useContext(AddressesContext);
-
   useEffect(() => {
-    setContext(roninDirections);
-  }, [setContext, roninDirections]);
+    if (invalidEntries === 0) {
+      setTimeout(() => {
+        toggleAggregator();
+      }, 1000);
+    }
+  }, [toggleAggregator, invalidEntries]);
 
   return (
     <div className="aggregator" onClickCapture={closeAggregator}>
@@ -144,10 +141,16 @@ const AddressAggregator = ({ toggleAggregator }) => {
             onClick={() => {
               toggleAggregator();
             }}
+            disabled={invalidEntries === 0 ? true : false}
           >
             Cancel
           </button>
-          <button onClick={verifyAddresses}>Add address(es)</button>
+          <button
+            disabled={invalidEntries === 0 ? true : false}
+            onClick={verifyAddresses}
+          >
+            Add address(es)
+          </button>
         </div>
       </div>
     </div>

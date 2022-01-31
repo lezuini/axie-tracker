@@ -1,17 +1,6 @@
 import React, { useState } from "react";
-import AddressAggregator from "../AddressAggregator";
 
 const Menu = ({ closeMenu }) => {
-  const [aggregatorIsOpen, setAggregatorIsOpen] = useState(false);
-  const [configIsOpen, setConfigIsOpen] = useState(false);
-
-  const toggleAggregator = () => {
-    setAggregatorIsOpen(!aggregatorIsOpen);
-  };
-  const toggleConfig = () => {
-    setConfigIsOpen(!configIsOpen);
-  };
-
   return (
     <>
       <div
@@ -20,19 +9,25 @@ const Menu = ({ closeMenu }) => {
           closeMenu(e);
         }}
       >
-        <ul>
-          <h3>Menu</h3>
-          {/* <li>
-            <button onClick={toggleAggregator}>Add new address</button>
-          </li> */}
-          {/* <li>
-            <button onClick={toggleConfig}>Settings</button>
-          </li> */}
-        </ul>
+        <div className="container">
+          <h3>About the app</h3>
+          <p>Add ronin addresses and see the SLP they contain</p>
+          <a
+            href="https://github.com/leonardomeza87/axie-tracker"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Repository
+          </a>
+          <a
+            href="https://twitter.com/leonardomeza87"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            My Twitter
+          </a>
+        </div>
       </div>
-      {/* {aggregatorIsOpen && (
-        <AddressAggregator toggleAggregator={toggleAggregator} />
-      )} */}
     </>
   );
 };

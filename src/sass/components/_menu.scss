@@ -2,6 +2,7 @@
   position: absolute;
   top: 84px;
   right: 0;
+  z-index: 100;
 
   width: 100%;
   height: calc(100vh - 84px);
@@ -12,38 +13,29 @@
   justify-content: flex-end;
   align-items: flex-start;
 
-  ul {
+  .container {
     width: 80%;
     height: 100vh;
     list-style: none;
     background-color: #141925;
-    // border-radius: 6px;
     padding: 16px;
 
     box-shadow: 0 4px 4px 0 rgba($color: #000000, $alpha: 0.25);
 
-    li {
-      width: 100%;
-      margin: 6px 0;
+    color: #fff;
 
-      button {
-        width: 100%;
-        padding: 1rem;
-        cursor: pointer;
-        border: none;
-        background-color: transparent;
-        color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 
-        font-size: 16px;
-        line-height: 16px;
-        text-align: center;
+    h3 {
+      margin: 1rem 0;
+    }
 
-        border-radius: 6px;
-
-        &:hover {
-          background-color: slategray;
-        }
-      }
+    a {
+      color: yellow;
+      margin-top: 1rem;
     }
   }
 }

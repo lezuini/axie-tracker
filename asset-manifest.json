@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/axie-tracker/static/css/main.19f4660b.chunk.css",
-    "main.js": "/axie-tracker/static/js/main.26bf9ad7.chunk.js",
-    "main.js.map": "/axie-tracker/static/js/main.26bf9ad7.chunk.js.map",
-    "runtime-main.js": "/axie-tracker/static/js/runtime-main.32d691be.js",
-    "runtime-main.js.map": "/axie-tracker/static/js/runtime-main.32d691be.js.map",
-    "static/js/2.89f389e8.chunk.js": "/axie-tracker/static/js/2.89f389e8.chunk.js",
-    "static/js/2.89f389e8.chunk.js.map": "/axie-tracker/static/js/2.89f389e8.chunk.js.map",
+    "main.css": "/axie-tracker/static/css/main.187fdb01.css",
+    "main.js": "/axie-tracker/static/js/main.1885c317.js",
+    "static/media/pfp.png": "/axie-tracker/static/media/pfp.6f19ee2c8b614d224cf8.png",
+    "static/media/trophy.svg": "/axie-tracker/static/media/trophy.4de31bec6e49dd85c7b2baacc3a186f9.svg",
     "index.html": "/axie-tracker/index.html",
-    "static/css/main.19f4660b.chunk.css.map": "/axie-tracker/static/css/main.19f4660b.chunk.css.map",
-    "static/js/2.89f389e8.chunk.js.LICENSE.txt": "/axie-tracker/static/js/2.89f389e8.chunk.js.LICENSE.txt",
-    "static/media/caret-up.4a0c41ef.svg": "/axie-tracker/static/media/caret-up.4a0c41ef.svg",
-    "static/media/copy.5d1c3b98.svg": "/axie-tracker/static/media/copy.5d1c3b98.svg"
+    "static/media/copy.svg": "/axie-tracker/static/media/copy.5d1c3b98b2c06500da1da2fb8160e4dd.svg",
+    "static/media/refresh.svg": "/axie-tracker/static/media/refresh.7a70fc720e1222d6322800bc940ddf3f.svg",
+    "static/media/caret-down-circle.svg": "/axie-tracker/static/media/caret-down-circle.648626afa4ef4f848923ae47ee489203.svg",
+    "static/media/open-outline.svg": "/axie-tracker/static/media/open-outline.23f7c119e0c2b3e695ac7113f13938bc.svg",
+    "static/media/resize.svg": "/axie-tracker/static/media/resize.88b507be098e763d6c38648a2ce7d760.svg",
+    "static/media/caret.svg": "/axie-tracker/static/media/caret.4a0c41ef9205b1c2e131ee4ff91058c5.svg",
+    "static/media/add.svg": "/axie-tracker/static/media/add.8a84f57897338a51d9704c451aa0facd.svg",
+    "main.187fdb01.css.map": "/axie-tracker/static/css/main.187fdb01.css.map",
+    "main.1885c317.js.map": "/axie-tracker/static/js/main.1885c317.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.32d691be.js",
-    "static/js/2.89f389e8.chunk.js",
-    "static/css/main.19f4660b.chunk.css",
-    "static/js/main.26bf9ad7.chunk.js"
+    "static/css/main.187fdb01.css",
+    "static/js/main.1885c317.js"
   ]
 }

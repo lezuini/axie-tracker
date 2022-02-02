@@ -1,34 +1,26 @@
 .token-card {
-  width: 162px;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  border-radius: 6px;
 
-  position: relative;
-
-  background-color: #141925;
-
-  color: #fff;
-  font-family: "Quicksand", sans-serif;
-
+  width: 10.125rem;
+  height: 100%;
+  border-radius: 0.5rem;
   padding: 1.5rem 1rem;
 
-  // .container {
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: flex-start;
-  //   align-items: flex-start;
-  // }
+  position: relative;
+  background-color: var(--dark-gray);
+  font-family: "Quicksand", sans-serif;
+  color: #fff;
 
   .icon {
     position: absolute;
-    right: 10px;
-    top: 10px;
-    width: 34px;
-    height: 34px;
+    right: 0.625rem;
+    top: 0.625rem;
+    width: 2.25rem;
+    height: 2.25rem;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,31 +29,37 @@
     border-radius: 50%;
 
     img {
-      width: 24px;
-      height: 24px;
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 
   .token {
     h2 {
+      font-size: 1.25rem;
+      line-height: 1.25rem;
       font-weight: bold;
-      font-size: 20px;
-      line-height: 20px;
-      margin-bottom: 6px;
+      margin-bottom: 0.5rem;
+      color: var(--axs);
+
+      &.slp {
+        color: var(--slp);
+      }
     }
+
     p {
-      font-weight: 400;
-      font-size: 12px;
-      line-height: 12px;
-      margin-bottom: 16px;
+      font-size: 0.75rem;
+      line-height: 0.75rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
     }
   }
 
   strong {
     font-weight: bold;
-    font-size: 18px;
-    line-height: 18px;
-    margin-bottom: 6px;
+    font-size: 1.125rem;
+    line-height: 1.125rem;
+    margin-bottom: 0.25rem;
   }
 
   .priceChange {
@@ -70,46 +68,47 @@
     align-items: center;
 
     span {
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 14px;
-      margin-right: 6px;
+      font-size: 0.875rem;
+      line-height: 0.875rem;
+      font-weight: 500;
+      margin-right: 0.25rem;
     }
 
     svg {
-      width: 16px;
-      height: 16px;
+      width: 1rem;
+      height: 1rem;
     }
 
     &.positive {
       span {
-        color: green;
+        color: var(--green);
       }
       svg {
-        fill: green;
+        fill: var(--green);
       }
     }
+
     &.negative {
       span {
-        color: red;
+        color: var(--red);
       }
       svg {
-        fill: red;
+        fill: var(--red);
         transform: rotateZ(180deg);
       }
     }
   }
 
   .price-lowhigh {
-    margin-top: 0.5rem;
-
-    font-size: 12px;
-    line-height: 12px;
-
-    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
+    width: 100%;
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
 
     .element {
       display: flex;
@@ -120,16 +119,16 @@
       margin-right: 0.5rem;
 
       svg {
-        width: 16px;
-        height: 16px;
-        fill: red;
-        color: red;
+        width: 1rem;
+        height: 1rem;
+        fill: var(--red);
+        color: var(--red);
         margin-right: 0.25rem;
 
         &.inverted {
+          fill: var(--green);
+          color: var(--green);
           transform: rotateZ(180deg);
-          fill: green;
-          color: green;
         }
       }
     }

@@ -29,6 +29,15 @@
       background-color: #3c4b6e;
     }
 
+    &:disabled {
+      background-color: #181d2b;
+
+      svg {
+        animation: spin 0.4s ease-in-out;
+        transform-origin: 50% 57%;
+      }
+    }
+
     p {
       font-size: 14px;
       margin-right: 0.5rem;
@@ -37,6 +46,15 @@
     svg {
       width: 18px;
       height: 18px;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotateZ(0);
+      }
+      100% {
+        transform: rotateZ(360deg);
+      }
     }
   }
 
@@ -51,10 +69,5 @@
     padding: 20px;
 
     gap: 12px;
-
-    .summary {
-      grid-column: 2 / span 1;
-      grid-row: 1 / span 2;
-    }
   }
 }

@@ -50,7 +50,7 @@ const TokenPriceStatistics = ({ tokenUpdater, api, token }) => {
             />
           </div>
           <div className="token">
-            <h2>{token}</h2>
+            <h2 className={token === "SLP" ? "slp" : undefined}>{token}</h2>
             <p>
               {token === "SLP" ? "Smooth Love Potion" : "Axie Infinity Token"}
             </p>

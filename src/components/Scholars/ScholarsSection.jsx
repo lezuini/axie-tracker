@@ -42,7 +42,7 @@ const ScholarsSection = () => {
         <div className="accounts">
           {accountsData !== null &&
             tokenData !== null &&
-            accountsData.map((account, i) => {
+            accountsData.map((account) => {
               return (
                 <Scholar
                   account={account}

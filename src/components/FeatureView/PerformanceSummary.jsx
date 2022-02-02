@@ -34,42 +34,54 @@ const PerformanceSummary = () => {
   }, [accountsData]);
 
   return (
-    <div className="summary">
+    <div className="performance-summary">
       {tokensInAccounts !== null && tokenData !== null && (
         <>
           <h2>Scholars</h2>
           <div className="group">
-            <p>In game:</p>
+            <h4>In game:</h4>
             <strong>
               {tokensInAccounts.inGame} <span>SLP</span>
             </strong>
-            <span>{`USDT $${toSmallNumber(
-              tokensInAccounts.inGame * tokenData.lastPrice,
-              2
-            )}`}</span>
+            <p>
+              {`USDT `}
+              <span>
+                $
+                {toSmallNumber(
+                  tokensInAccounts.inGame * tokenData.lastPrice,
+                  2
+                )}
+              </span>
+            </p>
           </div>
           <div className="group">
-            <p>In wallet:</p>
+            <h4>In wallet:</h4>
             <strong>
               {tokensInAccounts.ronin} <span>SLP</span>
             </strong>
-            <span>{`USDT $${toSmallNumber(
-              tokensInAccounts.ronin * tokenData.lastPrice,
-              2
-            )}`}</span>
+            <p>
+              {`USDT `}
+              <span>
+                $
+                {toSmallNumber(tokensInAccounts.ronin * tokenData.lastPrice, 2)}
+              </span>
+            </p>
           </div>
-          <h3>Total:</h3>
           <div className="group">
+            <h4>Total:</h4>
             <strong>
               {tokensInAccounts.total} <span>SLP</span>
             </strong>
-            <span>{`USDT $${toSmallNumber(
-              tokensInAccounts.total * tokenData.lastPrice,
-              2
-            )}`}</span>
+            <p>
+              {`USDT `}
+              <span>
+                $
+                {toSmallNumber(tokensInAccounts.total * tokenData.lastPrice, 2)}
+              </span>
+            </p>
           </div>
           <div className="profit">
-            <h3>Profit (50%):</h3>
+            <h4>Profit (50%):</h4>
             <p>
               {`$${toSmallNumber(
                 (tokensInAccounts.total * tokenData.lastPrice) / 2,

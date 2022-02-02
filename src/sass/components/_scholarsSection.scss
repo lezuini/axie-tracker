@@ -15,12 +15,12 @@
 
     width: 100%;
     border-bottom: 2px solid gray;
-    color: yellow;
+    color: var(--greenish-yellow);
 
     .title {
       height: 60px;
 
-      border-bottom: 2px solid yellow;
+      border-bottom: 2px solid var(--greenish-yellow);
       margin-bottom: -2px;
 
       h3 {

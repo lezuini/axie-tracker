@@ -17,20 +17,7 @@ html {
   font-family: "Quicksand", sans-serif;
   width: 360px;
   // background-image: url("./images/broken_noise.png");
-  // background-color: #1a1a1a;
 }
-
-// html::before {
-//   content: "";
-//   position: fixed;
-//   z-index: -2;
-//   top: 44%;
-//   left: 44%;
-//   width: 12%;
-//   height: 12%;
-//   transform: scale(10);
-//   background-image: linear-gradient(135deg, #313440, #22252f);
-// }
 
 .app {
   display: flex;
@@ -38,7 +25,7 @@ html {
   align-items: flex-start;
   min-height: 100vh;
   width: 100%;
-  color: #000;
+  color: var(--white);
 
   &::before {
     content: "";
@@ -49,9 +36,12 @@ html {
 
     width: 360px;
     height: 105vh;
-    background: linear-gradient(135deg, #313440, #22252f);
+    background: linear-gradient(
+      135deg,
+      var(--gray-gradient-1),
+      var(--gray-gradient-2)
+    );
   }
-  // padding: 0.5rem;
 
   & > .container {
     width: 100%;

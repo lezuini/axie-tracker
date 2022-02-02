@@ -7,7 +7,7 @@ const AddressAggregator = ({ toggleAggregator, setRoninDirections }) => {
   const [invalidEntries, setInvalidEntries] = useState(null);
 
   const closeAggregator = (e) => {
-    if (e.target.className === "aggregator") {
+    if (e.target.className === "aggregator" && invalidEntries !== 0) {
       toggleAggregator();
     }
   };
@@ -65,6 +65,7 @@ const AddressAggregator = ({ toggleAggregator, setRoninDirections }) => {
 
   //Start textarea checks and update valid addresses
   const verifyAddresses = () => {
+    console.log("clik");
     const [parserResponse, invalidEntries] = addressParser();
 
     if (parserResponse.length !== 0) {
@@ -116,6 +117,7 @@ const AddressAggregator = ({ toggleAggregator, setRoninDirections }) => {
             }
             type="text"
             value={textareaContent}
+            disabled={invalidEntries === 0 ? true : false}
             onChange={handleTextChange}
             onKeyUp={verifyByHittingEnter}
             placeholder={`A ronin address should look like this:
@@ -139,6 +141,7 @@ const AddressAggregator = ({ toggleAggregator, setRoninDirections }) => {
         <div className="buttons">
           <button
             onClick={() => {
+              console.log("clik");
               toggleAggregator();
             }}
             disabled={invalidEntries === 0 ? true : false}

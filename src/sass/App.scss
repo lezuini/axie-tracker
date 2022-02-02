@@ -1,5 +1,7 @@
 @use "./hamburgers/hamburgers.scss";
 
+@use "./base/colors";
+
 @use "./components/addButton";
 @use "./components/header";
 @use "./components/tokenPriceStatistics";

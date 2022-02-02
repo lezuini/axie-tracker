@@ -5,7 +5,7 @@ header {
   padding: 20px;
   height: 84px;
   width: 100%;
-  background-color: #2c2f3b;
+  background: linear-gradient(to bottom right, #31343c, #232631);
 
   position: fixed;
   top: 0;
@@ -29,7 +29,7 @@ header {
       color: #6f757f;
 
       strong {
-        color: #9d9a33;
+        color: #b9b030;
       }
     }
   }

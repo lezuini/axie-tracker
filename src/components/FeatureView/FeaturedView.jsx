@@ -9,9 +9,16 @@ const FeaturedView = ({ setAccountUpdater }) => {
   const BINANCE_API = "https://api.binance.com/api/v3/ticker/24hr?symbol=";
 
   const [tokenUpdater, setTokenUpdater] = useState(null);
+  const [refreshDisabled, setRefreshDisabled] = useState(false);
 
   const handleClick = () => {
     const now = Date.now();
+
+    setRefreshDisabled(true);
+
+    setTimeout(() => {
+      setRefreshDisabled(false);
+    }, 500);
 
     console.log("Updating");
 
@@ -34,7 +41,7 @@ const FeaturedView = ({ setAccountUpdater }) => {
           token="AXS"
         />
       </div>
-      <button onMouseUp={handleClick}>
+      <button disabled={refreshDisabled ? true : false} onMouseUp={handleClick}>
         <p>Refresf</p>
         <IconRefresh />
       </button>

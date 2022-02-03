@@ -2,10 +2,15 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  height: 84px;
+
+  padding: 1.25rem;
+  height: 5.25rem;
   width: 100%;
-  background: linear-gradient(to bottom right, #31343c, #232631);
+  background: linear-gradient(
+    to bottom right,
+    var(--gray-gradient-1),
+    var(--gray-gradient-2)
+  );
 
   position: fixed;
   top: 0;
@@ -19,17 +24,18 @@ header {
     align-items: flex-start;
 
     h1 {
-      font-size: 18px;
+      font-size: 1.125rem;
       font-weight: bold;
-      color: #fff;
       font-family: "Exo", sans-serif;
+      color: var(--white);
     }
 
     span {
-      color: #6f757f;
+      color: var(--small-text);
+      font-weight: 500;
 
       strong {
-        color: #b9b030;
+        color: var(--greenish-yellow);
       }
     }
   }

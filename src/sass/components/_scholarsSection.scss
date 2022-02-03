@@ -4,7 +4,8 @@
   justify-content: flex-start;
   align-items: flex-start;
 
-  padding: 20px;
+  padding: 1.25rem;
+  padding-top: 0.25rem;
 
   margin-bottom: 10rem;
 
@@ -14,69 +15,78 @@
     align-items: center;
 
     width: 100%;
-    border-bottom: 2px solid gray;
+    border-bottom: 0.125rem solid var(--line);
     color: var(--greenish-yellow);
 
     .title {
-      height: 60px;
-
-      border-bottom: 2px solid var(--greenish-yellow);
-      margin-bottom: -2px;
+      border-bottom: 0.125rem solid var(--greenish-yellow);
+      margin-bottom: -0.125rem;
 
       h3 {
-        height: 100%;
         padding: 1rem;
       }
     }
   }
 
   .accounts-section {
-    margin-top: 1rem;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    margin-top: 1rem;
     width: 100%;
 
     .expander {
-      height: 42px;
-      width: 100%;
-      background-color: #2d2f3c;
-      border: none;
-      border-radius: 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      height: 3rem;
+      width: 100%;
+      background: linear-gradient(
+        to right,
+        var(--gray-gradient-1),
+        var(--gray-gradient-2)
+      );
+      border: none;
+      border-radius: 0.5rem;
       margin-bottom: 1rem;
-
-      color: #8990a3;
-
-      padding: 0 6px 0 1rem;
-
+      padding: 0 0.5rem 0 1rem;
       cursor: pointer;
+
+      color: var(--small-text);
 
       p {
         text-align: left;
-        font-size: 16px;
-        line-height: 16px;
+        font-size: 1rem;
+        line-height: 1rem;
       }
 
       .icon {
-        background-color: #353842;
-        width: 30px;
-        height: 30px;
-        border-radius: 4px;
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.25rem;
+        background-color: var(--gray-gradient-1);
 
-        color: #797c86;
+        color: var(--small-text);
+        transition: background-color 0.2s ease-in-out;
 
         &:hover {
-          background-color: #5d6374;
+          transition: none;
+          background-color: var(--expander-button-hover);
+        }
+        &:active {
+          transition: none;
+          background-color: var(--expander-button-active);
         }
 
         svg {
-          height: 24px;
-          width: 24px;
+          height: 1.5rem;
+          width: 1.5rem;
         }
       }
     }

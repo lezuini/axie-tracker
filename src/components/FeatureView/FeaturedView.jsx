@@ -42,7 +42,7 @@ const FeaturedView = ({ setAccountUpdater }) => {
         />
       </div>
       <button disabled={refreshDisabled ? true : false} onMouseUp={handleClick}>
-        <p>Refresf</p>
+        <p>Refresh</p>
         <IconRefresh />
       </button>
     </div>

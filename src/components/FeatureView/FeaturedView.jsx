@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import PerformanceSummary from "./PerformanceSummary";
 
+import PerformanceSummary from "./PerformanceSummary";
 import TokenPriceStatistics from "./TokenPriceStatistics";
 
 import { ReactComponent as IconRefresh } from "../../images/refresh.svg";
@@ -20,7 +20,7 @@ const FeaturedView = ({ setAccountUpdater }) => {
       setRefreshDisabled(false);
     }, 500);
 
-    console.log("Updating");
+    console.log("Updating token prices");
 
     setAccountUpdater(now);
     setTokenUpdater(now);

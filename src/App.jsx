@@ -6,11 +6,10 @@ import { TokenDataContext } from "./contexts/TokenDataContext";
 import { AccountsContext } from "./contexts/AccountsContext";
 
 import Header from "./components/Header/Header";
+import AddButton from "./components/AddButton";
+import AddressAggregator from "./components/AddressAggregator";
 import FeaturedView from "./components/FeatureView/FeaturedView";
 import ScholarsSection from "./components/Scholars/ScholarsSection";
-
-import AddressAggregator from "./components/AddressAggregator";
-import AddButton from "./components/AddButton";
 
 function App() {
   const GAME_API = "https://game-api.axie.technology/api/v1/";
@@ -23,7 +22,7 @@ function App() {
     setAggregatorIsActive(!aggregatorIsActive);
   };
 
-  //------------------token context only--------------
+  // ------------ Tokens context only ------------
 
   const [tokenData, setTokenData] = useState(null);
 
@@ -42,48 +41,56 @@ function App() {
     [tokenData, setTokenContext]
   );
 
-  //------------------accounts context only--------------
+  // ------------ Accounts context only ------------
 
   const [accountsData, setAccountsData] = useState(null);
 
-  // Get account information
+  // Get new account information (Updater only)
 
   useEffect(() => {
     const getAccountsDataFromAPI = async () => {
       let string = roninDirections.join(",");
-
       const res = await fetch(GAME_API + string);
       const json = await res.json();
 
       if (roninDirections.length === 1) {
         json.ronin = string;
-
         setAccountsData([json]);
       } else {
         let array = [];
-
         for (const key in json) {
           let ronin = "ronin:" + key.slice(2);
-
           json[key].ronin = ronin;
-
           array.push(json[key]);
         }
         setAccountsData(array);
       }
     };
 
-    if (roninDirections !== null) {
+    if (roninDirections !== null && roninDirections.length > 0) {
       getAccountsDataFromAPI();
+      console.log("Updating scholars information");
     }
-  }, [roninDirections, accountUpdater]);
+  }, [accountUpdater]);
+
+  useEffect(() => {
+    if (accountsData !== null) {
+      let ronins = [];
+
+      accountsData.forEach((account) => {
+        ronins.push(account.ronin);
+      });
+
+      setRoninDirections(ronins);
+    }
+  }, [accountsData]);
 
   // Context
   const setAccountsContext = useCallback(
     (newData) => {
-      setRoninDirections(newData);
+      setAccountsData(newData);
     },
-    [setRoninDirections]
+    [setAccountsData]
   );
 
   const getAccountsContext = useCallback(
@@ -99,26 +106,21 @@ function App() {
       <div className="container">
         <Header />
 
-        {/* This section is responsible for adding ronin addresses */}
-        {aggregatorIsActive && (
-          <AddressAggregator
-            toggleAggregator={toggleAggregator}
-            setRoninDirections={setRoninDirections}
-          />
-        )}
-
         <AddButton
           toggleAggregator={toggleAggregator}
           aggregatorIsActive={aggregatorIsActive}
         />
 
-        {/* These sections show the data obtained */}
-        <TokenDataContext.Provider value={getTokenContextValue()}>
-          <AccountsContext.Provider value={getAccountsContext()}>
+        <AccountsContext.Provider value={getAccountsContext()}>
+          {/* This section is responsible for adding ronin addresses */}
+          {aggregatorIsActive && (
+            <AddressAggregator toggleAggregator={toggleAggregator} />
+          )}
+          <TokenDataContext.Provider value={getTokenContextValue()}>
             <FeaturedView setAccountUpdater={setAccountUpdater} />
             <ScholarsSection />
-          </AccountsContext.Provider>
-        </TokenDataContext.Provider>
+          </TokenDataContext.Provider>
+        </AccountsContext.Provider>
       </div>
     </main>
   );

@@ -16,13 +16,7 @@ const ScholarsSection = () => {
       (account) => account.name !== name
     );
 
-    let newRoninDirections = [];
-
-    for (const key in newAccountData) {
-      newRoninDirections.push(newAccountData[key].ronin);
-    }
-
-    setContext(newRoninDirections);
+    setContext(newAccountData);
   };
 
   return (

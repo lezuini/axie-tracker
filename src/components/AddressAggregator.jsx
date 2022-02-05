@@ -6,7 +6,7 @@ const AddressAggregator = ({ toggleAggregator }) => {
   const GAME_API = "https://game-api.axie.technology/api/v1/";
 
   const [textareaContent, setTextareaContent] = useState(
-    "ronin:edb136a58e616c0443988d2897af59aa17045045 ronin:e6f4661ce451287042433da5aead165f0b7af11e"
+    "ronin:303eeb8e455a3076ec55ca79ea6c8e79e2f40c35 ronin:e6f4661ce451287042433da5aead165f0b7af11e"
   );
   const [invalidEntries, setInvalidEntries] = useState(null);
   const [roninAddressesNotValidated, setRoninAddressesNotValidated] =
@@ -14,10 +14,17 @@ const AddressAggregator = ({ toggleAggregator }) => {
   const [addressesAreValid, setAddressesAreValid] = useState(false);
   const [addressWithError, setAddressWithError] = useState(null);
   const [roninAddresses, setRoninAddresses] = useState(null);
+  const [fade, setFade] = useState(false);
 
   const closeAggregator = (e) => {
-    if (e.target.className === "aggregator" && invalidEntries !== 0) {
-      toggleAggregator();
+    let id = e.target.id;
+
+    if ((id === "aggregator" || id === "close-btn") && invalidEntries !== 0) {
+      setFade(true);
+
+      setTimeout(() => {
+        toggleAggregator();
+      }, 200);
     }
   };
 
@@ -74,17 +81,19 @@ const AddressAggregator = ({ toggleAggregator }) => {
 
   // Start textarea checks and update valid addresses
   const verifyAddresses = () => {
-    const [parserResponse, invalidEntries] = addressParser();
+    if (!fade) {
+      const [parserResponse, invalidEntries] = addressParser();
 
-    if (parserResponse.length !== 0) {
-      if (invalidEntries === 0) {
-        setInvalidEntries(0);
-        setRoninAddressesNotValidated(parserResponse);
+      if (parserResponse.length !== 0) {
+        if (invalidEntries === 0) {
+          setInvalidEntries(0);
+          setRoninAddressesNotValidated(parserResponse);
+        } else {
+          setInvalidEntries(invalidEntries);
+        }
       } else {
-        setInvalidEntries(invalidEntries);
+        setInvalidEntries(-1);
       }
-    } else {
-      setInvalidEntries(-1);
     }
   };
 
@@ -117,8 +126,12 @@ const AddressAggregator = ({ toggleAggregator }) => {
     setRoninAddresses(addresses);
 
     setTimeout(() => {
-      toggleAggregator();
-    }, 1000);
+      setFade(true);
+
+      setTimeout(() => {
+        toggleAggregator();
+      }, 200);
+    }, 800);
   };
 
   // Final validation consulting the API
@@ -164,7 +177,9 @@ const AddressAggregator = ({ toggleAggregator }) => {
             if (json[key].name !== null) {
               array.push(json[key]);
             } else {
-              setError(string);
+              error = true;
+
+              setError(ronin);
             }
           } else {
             error = true;
@@ -217,8 +232,6 @@ const AddressAggregator = ({ toggleAggregator }) => {
 
         if (total === ronins.length) filteredArray.push(roninAddresses[i]);
       }
-
-      // console.log(filteredArray);
     }
 
     if (roninAddresses !== null) {
@@ -231,7 +244,11 @@ const AddressAggregator = ({ toggleAggregator }) => {
   }, [roninAddresses]);
 
   return (
-    <div className="aggregator" onClickCapture={closeAggregator}>
+    <div
+      id="aggregator"
+      className={`aggregator ${fade ? "fade" : ""}`}
+      onClickCapture={closeAggregator}
+    >
       <div className="container">
         <h3>Add new address(es)</h3>
         <label htmlFor="addressAggregator">
@@ -291,9 +308,8 @@ const AddressAggregator = ({ toggleAggregator }) => {
         </div>
         <div className="buttons">
           <button
-            onClick={() => {
-              toggleAggregator();
-            }}
+            id="close-btn"
+            onClick={closeAggregator}
             disabled={invalidEntries === 0 ? true : false}
           >
             Cancel

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { ReactComponent as IconCopy } from "../../images/copy.svg";
 import { ReactComponent as IconOpen } from "../../images/open-outline.svg";
@@ -10,6 +10,8 @@ import PFP from "../../images/pfp.png";
 
 const Scholar = ({ account, lastPrice, deleteAccount }) => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
+  const scholarDetails = useRef(null);
+  const [fadeOutIsActive, setFadeOutIsActive] = useState(false);
 
   const toHumanDate = (milliseconds) => {
     const ms = Number(milliseconds.toString() + "000");
@@ -25,17 +27,18 @@ const Scholar = ({ account, lastPrice, deleteAccount }) => {
     return humanDate;
   };
 
-  const getDaysDifference = (s, e) => {
-    const d = e - s;
+  const getDaysDifference = (date1, date2) => {
+    const diffTime = date2 - date1;
+    const diffDays = diffTime / (1000 * 60 * 60 * 24);
 
-    return d / 86400000;
+    return diffDays;
   };
 
   const getDaysLeft = (nextClaim) => {
-    const msStart = Date.now();
-    const msEnd = Number(nextClaim.toString() + "000");
+    const date1 = Date.now();
+    const date2 = Number(nextClaim.toString() + "000");
 
-    let days = getDaysDifference(msStart, msEnd);
+    let days = getDaysDifference(date1, date2);
 
     if (days < 0) {
       days = 0;
@@ -45,17 +48,37 @@ const Scholar = ({ account, lastPrice, deleteAccount }) => {
   };
 
   const getAverage = (lastClaim) => {
-    const msStart = Number(lastClaim.toString() + "000");
-    const msEnd = Date.now();
+    const date1 = Number(lastClaim + "000");
+    const date2 = Date.now();
 
-    const days = getDaysDifference(msStart, msEnd);
+    const days = getDaysDifference(date1, date2);
 
-    return Math.floor(account.in_game_slp / days);
+    let avg = Math.floor(account.in_game_slp / Math.ceil(days));
+
+    return avg;
   };
 
   const toggleDropdown = () => {
-    setDropdownIsOpen(!dropdownIsOpen);
+    if (!dropdownIsOpen) {
+      setDropdownIsOpen(!dropdownIsOpen);
+    } else {
+      setFadeOutIsActive(true);
+      setTimeout(() => {
+        setFadeOutIsActive(false);
+        setDropdownIsOpen(!dropdownIsOpen);
+      }, 300);
+    }
   };
+
+  // Scrolllll
+  useEffect(() => {
+    if (dropdownIsOpen) {
+      scholarDetails.current.scrollIntoView({
+        block: "center",
+        behavior: "smooth",
+      });
+    }
+  }, [dropdownIsOpen]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(account.ronin);
@@ -104,7 +127,10 @@ const Scholar = ({ account, lastPrice, deleteAccount }) => {
             </div>
           </div>
           {dropdownIsOpen && (
-            <div className="dropdown">
+            <div
+              className={`dropdown ${fadeOutIsActive ? "fade" : ""}`}
+              ref={scholarDetails}
+            >
               <div className="wallet">
                 <a
                   href={`https://marketplace.axieinfinity.com/profile/${account.ronin}/axie`}

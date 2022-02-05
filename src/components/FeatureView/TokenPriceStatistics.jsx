@@ -11,6 +11,7 @@ import { ReactComponent as IconCaretCircle } from "../../images/caret-down-circl
 import { TokenDataContext } from "../../contexts/TokenDataContext";
 
 const TokenPriceStatistics = ({ tokenUpdater, api, token }) => {
+  const [flashIsOn, setFlashIsOn] = useState(false);
   const [tokenData, setTokenData] = useState(null);
 
   useEffect(() => {
@@ -20,6 +21,12 @@ const TokenPriceStatistics = ({ tokenUpdater, api, token }) => {
       const json = await res.json();
 
       setTokenData(json);
+
+      setFlashIsOn(true);
+
+      setTimeout(() => {
+        setFlashIsOn(false);
+      }, 200);
     };
 
     getTokenData();
@@ -40,7 +47,7 @@ const TokenPriceStatistics = ({ tokenUpdater, api, token }) => {
   }, [context, tokenData]);
 
   return (
-    <div className="token-card">
+    <div className={`token-card ${flashIsOn ? "flash" : ""}`}>
       {tokenData !== null ? (
         <>
           <div className="icon">

@@ -12,7 +12,14 @@
   position: relative;
   background-color: var(--dark-gray);
   font-family: "Quicksand", sans-serif;
-  color: #fff;
+  color: var(--white);
+  overflow: hidden;
+
+  transition: background-color 0.1s ease-in-out;
+
+  &.flash {
+    background-color: var(--tokens-flash);
+  }
 
   .icon {
     position: absolute;
@@ -25,7 +32,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: #16222e;
+    background-color: var(--token-icon);
     border-radius: 50%;
 
     img {

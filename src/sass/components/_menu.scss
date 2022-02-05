@@ -1,4 +1,4 @@
-.menu {
+#menu {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
@@ -13,49 +13,107 @@
   background-color: var(--shadow);
 
   opacity: 0;
-  animation: opacity 0.2s ease-in-out forwards;
+  transition: opacity 0.2s ease-in-out;
 
-  .container {
+  .menu-container {
     display: flex;
-    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 
     width: 80%;
-    height: 100vh;
-    list-style: none;
+    height: 100%;
     background-color: var(--dark-gray);
     padding: 1rem;
     color: var(--white);
 
     transform: translateX(100%);
-    animation: menu 0.2s ease-in-out forwards;
+    transition: transform 0.2s ease-in-out;
 
-    h3 {
-      margin: 1rem 0;
-    }
+    .container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
 
-    a {
-      color: var(--add-button);
-      margin-top: 1rem;
-    }
+      overflow-y: auto;
 
-    @keyframes menu {
-      0% {
-        transform: translateX(100%);
+      h3 {
+        margin: 0.25rem 0 1rem;
+        font-size: 18px;
+        line-height: 20px;
       }
-      100% {
-        transform: translateX(0);
+
+      hr {
+        width: 100%;
+        height: 1px;
+        color: var(--line);
+        margin: 0.5rem 0;
+      }
+
+      h4 {
+        margin: 0.5rem 0;
+        font-size: 1rem;
+        line-height: 1.125rem;
+      }
+
+      p {
+        margin-bottom: 0.5rem;
+        font-size: 16px;
+        line-height: 18px;
+        color: var(--menu-text);
+
+        a {
+          color: var(--add-button);
+        }
+      }
+
+      #checkbox {
+        margin-top: 0.5rem;
+        height: 1.5rem;
+        width: 3rem;
+        border-radius: 0.75rem;
+        background-color: var(--greyish-purple);
+        cursor: pointer;
+
+        position: relative;
+
+        transition: background-color 0.2s ease-in-out;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0.1875rem;
+          left: 0.1875rem;
+          border-radius: 50%;
+
+          height: 1.125rem;
+          width: 1.125rem;
+          background-color: var(--white);
+
+          transition: transform 0.2s ease-in-out;
+        }
+
+        &.active {
+          background-color: var(--green);
+        }
+        &.active::after {
+          transform: translateX(1.375rem);
+        }
       }
     }
   }
 
-  @keyframes opacity {
-    0% {
-      opacity: 0;
+  &.open {
+    opacity: 1;
+
+    .menu-container {
+      transform: translateX(0);
     }
-    100% {
-      opacity: 1;
-    }
+  }
+
+  &.close {
+    visibility: hidden;
   }
 }

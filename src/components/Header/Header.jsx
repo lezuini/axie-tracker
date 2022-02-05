@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Menu from "./Menu";
 
 const Header = () => {
-  const [menuIsActive, setMenuIsActive] = useState(false);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [menuIsVisible, setMenuIsVisible] = useState(false);
 
   const toggleMenu = () => {
-    setMenuIsActive(!menuIsActive);
-  };
-
-  const closeMenu = (e) => {
-    if (e.target.className === "menu") {
-      toggleMenu();
+    if (menuIsOpen) {
+      closeMenu(true);
+    } else if (!menuIsVisible) {
+      setMenuIsOpen(true);
     }
   };
+
+  const closeMenu = (bypass, e) => {
+    if (menuIsOpen && (bypass || e.target.id === "menu")) {
+      setMenuIsOpen(false);
+
+      setTimeout(() => {
+        setMenuIsVisible(false);
+      }, 200);
+    }
+  };
+
+  useEffect(() => {
+    if (menuIsOpen) {
+      setMenuIsVisible(true);
+    }
+  }, [menuIsOpen]);
 
   return (
     <header>
@@ -24,7 +39,7 @@ const Header = () => {
       </div>
       <button
         className={
-          menuIsActive
+          menuIsOpen
             ? "hamburger hamburger--slider is-active"
             : "hamburger hamburger--slider"
         }
@@ -35,7 +50,11 @@ const Header = () => {
           <span className="hamburger-inner"></span>
         </span>
       </button>
-      {menuIsActive ? <Menu closeMenu={closeMenu} /> : ""}
+      <Menu
+        menuIsOpen={menuIsOpen}
+        menuIsVisible={menuIsVisible}
+        closeMenu={closeMenu}
+      />
     </header>
   );
 };

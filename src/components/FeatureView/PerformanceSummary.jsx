@@ -2,13 +2,16 @@ import { useContext, useEffect, useState } from "react";
 
 import { TokenDataContext } from "../../contexts/TokenDataContext";
 import { AccountsContext } from "../../contexts/AccountsContext";
+import { SettingsContext } from "../../contexts/SettingsContext";
 
 import { toSmallNumber } from "../../helpers/utilities";
 
 const PerformanceSummary = () => {
   const { tokenData } = useContext(TokenDataContext);
   const { accountsData } = useContext(AccountsContext);
+  const { settings } = useContext(SettingsContext);
 
+  const [flashIsOn, setFlashIsOn] = useState(false);
   const [tokensInAccounts, setTokensInAccounts] = useState({
     inGame: 0,
     ronin: 0,
@@ -19,22 +22,38 @@ const PerformanceSummary = () => {
     if (accountsData !== null) {
       let sumOfSLP = 0;
       let sumOfRoninSLP = 0;
+      let total = 0;
 
       accountsData.forEach((account) => {
         sumOfSLP += account.in_game_slp;
         sumOfRoninSLP += account.ronin_slp;
       });
 
+      if (settings.wallet) {
+        total = sumOfSLP + sumOfRoninSLP;
+      } else {
+        total = sumOfSLP;
+      }
       setTokensInAccounts({
         inGame: sumOfSLP,
         ronin: sumOfRoninSLP,
-        total: sumOfSLP + sumOfRoninSLP,
+        total: total,
       });
     }
-  }, [accountsData]);
+  }, [accountsData, settings]);
+
+  useEffect(() => {
+    if (accountsData !== null) {
+      setFlashIsOn(true);
+
+      setTimeout(() => {
+        setFlashIsOn(false);
+      }, 200);
+    }
+  }, [tokenData, accountsData]);
 
   return (
-    <div className="performance-summary">
+    <div className={`performance-summary ${flashIsOn ? "flash" : ""}`}>
       {tokensInAccounts !== null && tokenData !== null && (
         <>
           <h2>Scholars</h2>

@@ -4,6 +4,7 @@ import "./sass/App.scss";
 
 import { TokenDataContext } from "./contexts/TokenDataContext";
 import { AccountsContext } from "./contexts/AccountsContext";
+import { SettingsContext } from "./contexts/SettingsContext";
 
 import Header from "./components/Header/Header";
 import AddButton from "./components/AddButton";
@@ -21,6 +22,18 @@ function App() {
   const toggleAggregator = () => {
     setAggregatorIsActive(!aggregatorIsActive);
   };
+
+  // ------------ Settings context only ------------
+
+  const [settings, setSettings] = useState({ wallet: false });
+
+  const getSettingsContext = useCallback(
+    () => ({
+      settings,
+      setContext: setSettings,
+    }),
+    [settings, setSettings]
+  );
 
   // ------------ Tokens context only ------------
 
@@ -104,23 +117,25 @@ function App() {
   return (
     <main className="app">
       <div className="container">
-        <Header />
+        <SettingsContext.Provider value={getSettingsContext()}>
+          <Header />
 
-        <AddButton
-          toggleAggregator={toggleAggregator}
-          aggregatorIsActive={aggregatorIsActive}
-        />
+          <AddButton
+            toggleAggregator={toggleAggregator}
+            aggregatorIsActive={aggregatorIsActive}
+          />
 
-        <AccountsContext.Provider value={getAccountsContext()}>
-          {/* This section is responsible for adding ronin addresses */}
-          {aggregatorIsActive && (
-            <AddressAggregator toggleAggregator={toggleAggregator} />
-          )}
-          <TokenDataContext.Provider value={getTokenContextValue()}>
-            <FeaturedView setAccountUpdater={setAccountUpdater} />
-            <ScholarsSection />
-          </TokenDataContext.Provider>
-        </AccountsContext.Provider>
+          <AccountsContext.Provider value={getAccountsContext()}>
+            {/* This section is responsible for adding ronin addresses */}
+            {aggregatorIsActive && (
+              <AddressAggregator toggleAggregator={toggleAggregator} />
+            )}
+            <TokenDataContext.Provider value={getTokenContextValue()}>
+              <FeaturedView setAccountUpdater={setAccountUpdater} />
+              <ScholarsSection />
+            </TokenDataContext.Provider>
+          </AccountsContext.Provider>
+        </SettingsContext.Provider>
       </div>
     </main>
   );

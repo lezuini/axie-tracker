@@ -16,6 +16,7 @@ const PerformanceSummary = () => {
     inGame: 0,
     ronin: 0,
     total: 0,
+    profit: 0,
   });
 
   useEffect(() => {
@@ -23,21 +24,25 @@ const PerformanceSummary = () => {
       let sumOfSLP = 0;
       let sumOfRoninSLP = 0;
       let total = 0;
+      let profit = 0;
 
       accountsData.forEach((account) => {
         sumOfSLP += account.in_game_slp;
         sumOfRoninSLP += account.ronin_slp;
       });
 
+      total = sumOfSLP + sumOfRoninSLP;
+
       if (settings.wallet) {
-        total = sumOfSLP + sumOfRoninSLP;
+        profit = total / 2;
       } else {
-        total = sumOfSLP;
+        profit = sumOfSLP / 2;
       }
       setTokensInAccounts({
         inGame: sumOfSLP,
         ronin: sumOfRoninSLP,
-        total: total,
+        total: sumOfSLP + sumOfRoninSLP,
+        profit: profit,
       });
     }
   }, [accountsData, settings]);
@@ -103,7 +108,7 @@ const PerformanceSummary = () => {
             <h4>Profit (50%):</h4>
             <p>
               {`$${toSmallNumber(
-                (tokensInAccounts.total * tokenData.lastPrice) / 2,
+                tokensInAccounts.profit * tokenData.lastPrice,
                 2
               )}`}{" "}
               <span>USDT</span>

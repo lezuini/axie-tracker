@@ -138,7 +138,9 @@ const Scholar = ({ account, lastPrice, deleteAccount }) => {
                   rel="noopener noreferrer"
                 >
                   <p>{account.ronin}</p>
-                  <IconOpen />
+                  <div className="icon">
+                    <IconOpen />
+                  </div>
                 </a>
                 <button className="copy-btn" onMouseUp={handleCopy}>
                   <IconCopy />

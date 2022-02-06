@@ -62,19 +62,24 @@ const TokenPriceStatistics = ({ tokenUpdater, api, token }) => {
               {token === "SLP" ? "Smooth Love Potion" : "Axie Infinity Token"}
             </p>
           </div>
-          <strong>{`USDT $${toSmallNumber(
-            tokenData.lastPrice,
-            token === "SLP" ? 4 : 2
-          )}`}</strong>
-          <div
-            className={`priceChange ${
-              Math.sign(tokenData.priceChangePercent) === -1
-                ? "negative"
-                : "positive"
-            }`}
-          >
-            <span>{`${toSmallNumber(tokenData.priceChangePercent, 2)}%`}</span>
-            <IconCaret />
+          <div className="price-indicator">
+            <strong>{`USDT $${toSmallNumber(
+              tokenData.lastPrice,
+              token === "SLP" ? 4 : 2
+            )}`}</strong>
+            <div
+              className={`price-change ${
+                Math.sign(tokenData.priceChangePercent) === -1
+                  ? "negative"
+                  : "positive"
+              }`}
+            >
+              <span>{`${toSmallNumber(
+                tokenData.priceChangePercent,
+                2
+              )}%`}</span>
+              <IconCaret />
+            </div>
           </div>
           <div className="price-lowhigh">
             <div className="element">

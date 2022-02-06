@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { ReactComponent as IconResize } from "../../images/resize.svg";
+// import { ReactComponent as IconResize } from "../../images/resize.svg";
 
 import { TokenDataContext } from "../../contexts/TokenDataContext";
 import { AccountsContext } from "../../contexts/AccountsContext";
@@ -29,9 +29,9 @@ const ScholarsSection = () => {
       <div className="accounts-section">
         <button className="expander">
           <p>Total accounts: {accountsData ? accountsData.length : "0"}</p>
-          <div className="icon">
+          {/* <div className="icon">
             <IconResize />
-          </div>
+          </div> */}
         </button>
         <div className="accounts">
           {accountsData !== null &&

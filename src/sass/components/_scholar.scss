@@ -37,7 +37,7 @@
 
       .upper {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
 
         font-weight: bold;
@@ -50,17 +50,20 @@
 
           text-overflow: ellipsis;
 
-          max-width: 10.25rem;
+          width: min-content;
           overflow: hidden;
           white-space: nowrap;
+          margin-right: 1rem;
         }
 
         .slp {
           font-size: 1.25rem;
           line-height: 1.25rem;
           color: var(--white);
+          width: fit-content;
+          min-width: fit-content;
 
-          margin-left: auto;
+          // margin-left: auto;
         }
       }
 
@@ -151,9 +154,14 @@
         align-items: center;
 
         height: 100%;
+        width: 100%;
+        max-width: min-content;
         padding-left: 0.5rem;
         color: var(--white);
         text-decoration: none;
+        overflow: hidden;
+
+        margin-right: 1rem;
 
         &:hover {
           text-decoration: underline;
@@ -163,17 +171,25 @@
           font-size: 0.875rem;
           line-height: 2.75rem;
           font-weight: 400;
-          max-width: 14.5rem;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
         }
 
-        svg {
+        .icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          height: 1rem;
+          width: 1rem;
           margin-left: 0.25rem;
-          height: 0.875rem;
-          width: 0.875rem;
-          transform: translateY(-0.0625rem);
+
+          svg {
+            height: 0.875rem;
+            width: 0.875rem;
+            transform: translateY(-0.0625rem);
+          }
         }
       }
 
@@ -185,6 +201,8 @@
 
         height: 2rem;
         width: 2rem;
+        min-width: 2rem;
+
         border: none;
         border-radius: 0.25rem;
         background-color: var(--scholar-box-bg);

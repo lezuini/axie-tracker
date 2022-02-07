@@ -23,7 +23,7 @@ const ScholarsSection = () => {
     <section className="scholars-section">
       <div className="separator">
         <div className="title">
-          <h3>Scholars</h3>
+          <h3>Accounts</h3>
         </div>
       </div>
       <div className="accounts-section">

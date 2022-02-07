@@ -6,7 +6,7 @@ import { ReactComponent as IconTrophy } from "../../images/trophy.svg";
 
 import { toSmallNumber } from "../../helpers/utilities";
 
-import PFP from "../../images/pfp.png";
+import PFP from "../../images/pfp1.jpg";
 
 const Scholar = ({ account, lastPrice, deleteAccount }) => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);

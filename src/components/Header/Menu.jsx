@@ -24,7 +24,7 @@ const Menu = ({ menuIsOpen, menuIsVisible, closeMenu }) => {
         <div className="container">
           <h3>About the app</h3>
           <p>
-            Small app to follow multiple ronin accounts and view their slp,
+            Small app to follow multiple RONIN accounts and view their SLP,
             optimized for simplicity.
           </p>
           <hr />

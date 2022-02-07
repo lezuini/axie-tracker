@@ -16,6 +16,24 @@
 
       position: relative;
 
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -0.5rem;
+        width: calc(100% + 16px);
+        height: 100%;
+        border-radius: 0.5rem;
+
+        background-color: transparent;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      &:hover::after {
+        transition: none;
+        background-color: var(--shadow-white);
+      }
+
       .profile-picture {
         display: flex;
         justify-content: center;

@@ -5,9 +5,7 @@ import { AccountsContext } from "../contexts/AccountsContext";
 const AddressAggregator = ({ toggleAggregator }) => {
   const GAME_API = "https://game-api.axie.technology/api/v1/";
 
-  const [textareaContent, setTextareaContent] = useState(
-    "ronin:303eeb8e455a3076ec55ca79ea6c8e79e2f40c35 ronin:e6f4661ce451287042433da5aead165f0b7af11e"
-  );
+  const [textareaContent, setTextareaContent] = useState("");
   const [invalidEntries, setInvalidEntries] = useState(null);
   const [roninAddressesNotValidated, setRoninAddressesNotValidated] =
     useState(null);
@@ -272,8 +270,7 @@ const AddressAggregator = ({ toggleAggregator }) => {
             disabled={invalidEntries === 0 ? true : false}
             onChange={handleTextChange}
             onKeyUp={verifyByHittingEnter}
-            placeholder={`A ronin address should look like this:
-            ronin:edb136a58e616c0443988d2897af59aa17045045`}
+            placeholder={`A ronin address should look like this: ronin:edb136a58e616c0443988d2897af59aa17045045`}
           />
         </div>
         <div className="notifications">

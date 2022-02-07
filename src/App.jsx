@@ -56,7 +56,11 @@ function App() {
 
   // ------------ Accounts context only ------------
 
-  const [accountsData, setAccountsData] = useState(null);
+  const [accountsData, setAccountsData] = useState(
+    localStorage.getItem("accountsData")
+      ? JSON.parse(localStorage.getItem("accountsData"))
+      : null
+  );
 
   // Get new account information (Updater only)
 
@@ -82,7 +86,7 @@ function App() {
 
     if (roninDirections !== null && roninDirections.length > 0) {
       getAccountsDataFromAPI();
-      console.log("Updating scholars information");
+      console.log("Updating accounts information");
     }
   }, [accountUpdater]);
 
@@ -102,6 +106,8 @@ function App() {
   const setAccountsContext = useCallback(
     (newData) => {
       setAccountsData(newData);
+
+      localStorage.setItem("accountsData", JSON.stringify(newData));
     },
     [setAccountsData]
   );

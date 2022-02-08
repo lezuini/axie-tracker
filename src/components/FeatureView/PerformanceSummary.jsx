@@ -61,7 +61,7 @@ const PerformanceSummary = () => {
     <div className={`performance-summary ${flashIsOn ? "flash" : ""}`}>
       {tokensInAccounts !== null && tokenData !== null && (
         <>
-          <h2>Scholars</h2>
+          <h2>Summary</h2>
           <div className="group">
             <h4>In game:</h4>
             <strong>

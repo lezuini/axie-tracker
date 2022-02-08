@@ -105,14 +105,22 @@ const AddressAggregator = ({ toggleAggregator }) => {
   // ------------ Fetch API ------------
 
   const setError = (address, reason) => {
-    setAddressWithError(address);
-
     // Does not exist
     if (reason === null) {
+      setAddressWithError(address);
       setInvalidEntries(-2);
+    }
+    // Abort Error
+    else if (reason === "AbortError") {
+      setInvalidEntries(-4);
+    }
+    // Undefined Error
+    else if (reason === "Error") {
+      setInvalidEntries(-5);
     }
     // Data could not be obtained
     else {
+      setAddressWithError(address);
       setInvalidEntries(-3);
     }
   };
@@ -134,65 +142,91 @@ const AddressAggregator = ({ toggleAggregator }) => {
 
   // Final validation consulting the API
   useEffect(() => {
+    const fetchWithTimeout = async (resource, options = {}) => {
+      const { timeout = 7000 } = options;
+
+      const controller = new AbortController();
+      const id = setTimeout(() => controller.abort(), timeout);
+      const response = await fetch(resource, {
+        ...options,
+        signal: controller.signal,
+      });
+      clearTimeout(id);
+      return response;
+    };
+
     const getAccountsDataFromAPI = async () => {
       let string = roninAddressesNotValidated.join(",");
 
-      const res = await fetch(GAME_API + string);
-      const json = await res.json();
+      let res;
+      let json;
 
-      // When a single address is validated
-      if (roninAddressesNotValidated.length === 1) {
-        json.ronin = string;
-        let length = Object.keys(json).length;
+      try {
+        res = await fetchWithTimeout(GAME_API + string);
+        json = await res.json();
 
-        if (length !== 18) {
-          if (length === 1) {
-            setError(string, null);
+        // When a single address is validated
+        if (roninAddressesNotValidated.length === 1) {
+          json.ronin = string;
+          let length = Object.keys(json).length;
+
+          if (length !== 18) {
+            if (length === 1) {
+              setError(string, null);
+            } else {
+              setError(string);
+            }
           } else {
-            setError(string);
-          }
-        } else {
-          if (json.name !== null) {
-            setValidatedAddresses([json]);
-          } else {
-            setError(string);
+            if (json.name !== null) {
+              setValidatedAddresses([json]);
+            } else {
+              setError(string);
+            }
           }
         }
-      }
-      // When multiple addresses are validated
-      else {
-        let array = [];
-        let error = false;
+        // When multiple addresses are validated
+        else {
+          let array = [];
+          let error = false;
 
-        for (const key in json) {
-          let ronin = "ronin:" + key.slice(2);
+          for (const key in json) {
+            let ronin = "ronin:" + key.slice(2);
 
-          json[key].ronin = ronin;
+            json[key].ronin = ronin;
 
-          let length = Object.keys(json[key]).length;
+            let length = Object.keys(json[key]).length;
 
-          if (length === 18) {
-            if (json[key].name !== null) {
-              array.push(json[key]);
+            if (length === 18) {
+              if (json[key].name !== null) {
+                array.push(json[key]);
+              } else {
+                error = true;
+
+                setError(ronin);
+              }
             } else {
               error = true;
 
-              setError(ronin);
+              if (length === 1) {
+                setError(ronin, null);
+              } else {
+                setError(ronin);
+              }
+              break;
             }
-          } else {
-            error = true;
+          }
 
-            if (length === 1) {
-              setError(ronin, null);
-            } else {
-              setError(ronin);
-            }
-            break;
+          if (!error) {
+            setValidatedAddresses(array);
           }
         }
+      } catch (error) {
+        console.log(error);
 
-        if (!error) {
-          setValidatedAddresses(array);
+        if (error.name === "AbortError") {
+          setError(null, "AbortError");
+        } else {
+          setError(null, "Error");
         }
       }
     };
@@ -290,12 +324,18 @@ const AddressAggregator = ({ toggleAggregator }) => {
                     30
                   )} does not exist`}
                 </p>
-              ) : (
+              ) : invalidEntries === -3 ? (
                 <p>
                   {`Could not get data for address: ...${addressWithError.slice(
                     30
                   )}`}
                 </p>
+              ) : invalidEntries === -4 ? (
+                <p>
+                  {`There are problems with the Game API, please try again later.`}
+                </p>
+              ) : (
+                <p>{`An unknown error occurred, please try again later.`}</p>
               )
             ) : !addressesAreValid ? (
               <p className="correct">Seems good, checking...</p>

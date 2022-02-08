@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/axie-tracker/static/css/main.ebd41eab.css",
-    "main.js": "/axie-tracker/static/js/main.5e33acfc.js",
+    "main.js": "/axie-tracker/static/js/main.be3a531b.js",
     "static/media/pfp1.jpg": "/axie-tracker/static/media/pfp1.a5939046ae4c04bf41f9.jpg",
     "index.html": "/axie-tracker/index.html",
     "static/media/trophy.svg": "/axie-tracker/static/media/trophy.4de31bec6e49dd85c7b2baacc3a186f9.svg",
@@ -12,10 +12,10 @@
     "static/media/caret.svg": "/axie-tracker/static/media/caret.4a0c41ef9205b1c2e131ee4ff91058c5.svg",
     "static/media/add.svg": "/axie-tracker/static/media/add.8a84f57897338a51d9704c451aa0facd.svg",
     "main.ebd41eab.css.map": "/axie-tracker/static/css/main.ebd41eab.css.map",
-    "main.5e33acfc.js.map": "/axie-tracker/static/js/main.5e33acfc.js.map"
+    "main.be3a531b.js.map": "/axie-tracker/static/js/main.be3a531b.js.map"
   },
   "entrypoints": [
     "static/css/main.ebd41eab.css",
-    "static/js/main.5e33acfc.js"
+    "static/js/main.be3a531b.js"
   ]
 }
